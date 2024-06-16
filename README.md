@@ -8,3 +8,9 @@ Dotfiles for my Arch Linux Hyprland rice
 - Shell: zsh 5.9
 - DE: Hyprland 
 - Terminal: kitty
+
+## ToDo
+- Fix window size of nmtui and bluetuith
+- add end to media player tab (so it looks nice when broken)
+- add low battery notification
+- change look of notifications
