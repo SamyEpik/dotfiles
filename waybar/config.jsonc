@@ -49,12 +49,13 @@
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
     "format-alt": "{time} {icon}",
+    "on-click": "kitty btop -p 0",
+    "tooltip-format": "{timeTo}, Drawing {power} Watts",
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
   },
 
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "tooltip": false,
     "format-muted": " Muted",
     "on-click": "pamixer -t",
     "on-scroll-up": "pamixer -i 3",
@@ -89,7 +90,8 @@
     "format": "{temperatureC}°C ",
     "tooltip-format": "Average CPU-Core Temperature",
     "critical-threshold": 80,
-    "format-critical": "{temperatureC}°C "
+    "format-critical": "{temperatureC}°C ",
+    "on-click": "kitty btop -p 1"
   },
 
   "network": {
@@ -100,7 +102,6 @@
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "Disconnected ⚠",
     // "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
-    // "on-click": "exec kitty --class floating bluetuith"
     "on-click": "hyprctl dispatch exec 'kitty --class floating nmtui'" 
   },
 
@@ -117,7 +118,7 @@
   "memory": {
     "interval": 30,
     "format": "{}%  ",
-    "on-click": "kitty btop",
+    "on-click": "kitty btop -p 3",
     "max-length": 10
   },
 
@@ -172,6 +173,7 @@
 
   "custom/mediacontrols": {
     "format": "󰒭",
+    "tooltip-format": "Next",
     "on-click": "exec playerctl -p spotify next"
   },
 
