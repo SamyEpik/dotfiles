@@ -7,7 +7,7 @@
   "gtk-layer-shell": true,
   "height": 50,
   "modules-left": ["custom/arch", "clock", "hyprland/workspaces"],
-  "modules-center": ["hyprland/window", "image", "custom/mediaplayer"],
+  "modules-center": ["hyprland/window", "image", "custom/mediaplayer", "custom/mediacontrols"],
   "modules-right": [
     "network",
     "bluetooth",
@@ -29,23 +29,13 @@
     "on-click": "activate"
   },
 
-  // not used + doesnt work with non asus laptops
-  "custom/power_profile": {
-    //shows the current power profile and switches to next on click
-    "exec": "asusctl profile -p | sed s:'Active profile is'::",
-    "interval": 30,
-    "format": "󰈐{}",
-    "on-click": "asusctl profile -n; pkill -SIGRTMIN+8 waybar",
-    "signal": 8
-  },
-
   "tray": {
     "icon-size": 18,
     "spacing": 10
   },
 
   "clock": {
-    "format": "<b> {:%H:%M %p  %a, %e. %b}</b>",
+    "format": "<b> {:%R  %a, %e. %b}</b>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
 
@@ -178,6 +168,11 @@
     "smooth-scrolling-threshold": 20,
     "min-length": 20,
     "max-length": 20
+  },
+
+  "custom/mediacontrols": {
+    "format": "󰒭",
+    "on-click": "exec playerctl -p spotify next"
   },
 
   // not used

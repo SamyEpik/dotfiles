@@ -66,6 +66,7 @@ tooltip {
 #spotify,
 #image,
 #custom-mediaplayer,
+#custom-mediacontrols,
 #backlight {
   background: #1e1e2e;
   opacity: 0.6;
@@ -177,6 +178,12 @@ tooltip {
 }
 
 #custom-mediaplayer {
+  font-size: 16px;
+  border-radius: 0px 0px 0px 0px;
+  border-right: 0;
+}
+
+#custom-mediacontrols {
   font-size: 16px;
   border-radius: 0px 10px 10px 0px;
   margin-right: 10px;
