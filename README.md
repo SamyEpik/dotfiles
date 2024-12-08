@@ -13,7 +13,6 @@ Dotfiles for my Arch Linux Hyprland rice
 
 ## ToDo
 
-- Fix window size of nmtui and bluetuith
 - add end to media player tab (so it looks nice when broken)
 - add low battery notification
 - change look of notifications
