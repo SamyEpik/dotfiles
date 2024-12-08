@@ -18,6 +18,7 @@ Dotfiles for my Arch Linux Hyprland rice
 - change look of notifications
 - fix wallpapers not loading
 - lock screen when lid closed
+- some characters (chinese, icons) cant be displayed in firefox"
 
 ## Packages
 
