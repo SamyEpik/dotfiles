@@ -14,7 +14,6 @@ Dotfiles for my Arch Linux Hyprland rice
 ## ToDo
 
 - add low battery notification
-- change look of notifications
 - fix wallpapers not loading
 - lock screen when lid closed
 - some characters (chinese, icons) cant be displayed in firefox
