@@ -14,14 +14,13 @@ Dotfiles for my Arch Linux Hyprland rice
 ## ToDo
 
 - add low battery notification
-- fix wallpapers not loading
-- lock screen when lid closed
-- some characters (chinese, icons) cant be displayed in firefox
+- lock screen when laptop lid closed
+- add wallpaper + theme switcher
 
 ## Packages
 
 - install [yay](https://github.com/Jguer/yay?tab=readme-ov-file#installation) first
 
 ```bash
-yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spicetify hyprpaper wofi dunst catppuccin-gtk-theme-mocha cliphist firefox discord spotify obsidian vscodium-bin thunar pamixer playerctl brightnessctl hyprshot zsh pipewire pipewire-pulse pipewire-audio libreoffice-extension-texmaths libreoffice-fresh
+yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spicetify hyprpaper wofi dunst catppuccin-gtk-theme-mocha cliphist firefox discord spotify obsidian vscodium-bin thunar pamixer playerctl brightnessctl hyprshot zsh pipewire pipewire-pulse pipewire-audio libreoffice-extension-texmaths libreoffice-fresh noto-fonts noto-fonts-cjk noto-fonts-emoji
 ```
