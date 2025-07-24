@@ -149,7 +149,7 @@
   "custom/arch": {
     "format": "",
     "tooltip": false,
-    "on-click": "wofi --show drun"
+    "on-click": "kitty ~/.config/hypr/scripts/dashboard.sh"
   },
 
   "image": {
