@@ -13,7 +13,6 @@ Dotfiles for my Arch Linux Hyprland rice
 
 ## ToDo
 
-- add low battery notification
 - lock screen when laptop lid closed
 - add wallpaper + theme switcher
 - add opacity control
@@ -23,5 +22,5 @@ Dotfiles for my Arch Linux Hyprland rice
 - install [yay](https://github.com/Jguer/yay?tab=readme-ov-file#installation) first
 
 ```bash
-yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spicetify hyprpaper wofi dunst catppuccin-gtk-theme-mocha cliphist firefox discord spotify obsidian vscodium-bin thunar pamixer playerctl brightnessctl hyprshot zsh pipewire pipewire-pulse pipewire-audio libreoffice-extension-texmaths libreoffice-fresh noto-fonts noto-fonts-cjk noto-fonts-emoji kvantummanager qt5-wayland qt6-wayland swayidle
+yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spicetify hyprpaper wofi dunst catppuccin-gtk-theme-mocha cliphist firefox discord spotify obsidian vscodium-bin thunar pamixer playerctl brightnessctl hyprshot zsh pipewire pipewire-pulse pipewire-audio libreoffice-extension-texmaths libreoffice-fresh noto-fonts noto-fonts-cjk noto-fonts-emoji kvantummanager qt5-wayland qt6-wayland swayidle batsignal
 ```
