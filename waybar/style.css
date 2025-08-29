@@ -1,3 +1,5 @@
+@import "/home/samuel/.cache/wal/colors-waybar.css";
+
 * {
   border: none;
   border-radius: 0;
@@ -8,16 +10,16 @@
 }
 
 window#waybar {
-  background: rgba(21, 18, 27, 0);
-  color: #cdd6f4;
+  background: transparent;
+  color: @foreground;
 }
 
 tooltip {
-  background: #1e1e2e;
+  background: @background;
   border-radius: 10px;
   border-width: 2px;
   border-style: solid;
-  border-color: #595959;
+  border-color: @color0;
 }
 
 #workspaces button {
@@ -37,14 +39,13 @@ tooltip {
 }
 
 #workspaces button.urgent {
-  color: #11111b;
-  background: #a6e3a1;
+  color: @color0;
+  background: @color2;
   border-radius: 10px;
 }
 
 #workspaces button:hover {
-  background: #11111b;
-  color: #cdd6f4;
+  color: @foreground;
   border-radius: 10px;
 }
 
@@ -68,20 +69,20 @@ tooltip {
 #custom-mediaplayer,
 #custom-mediacontrols,
 #backlight {
-  background: #1e1e2e;
+  background: @background;
   opacity: 0.6;
   padding: 0px 10px;
   margin-top: 20px;
-  border: 2px solid #595959;
+  border: 2px solid @color0;
 }
 
 #temperature {
   border-radius: 10px 0px 0px 10px;
-  color: #f2cdcd;
+  color: @color5;
 }
 
 #temperature.critical {
-  color: #eba0ac;
+  color: @color1;
 }
 
 #backlight {
@@ -94,7 +95,7 @@ tooltip {
 }
 
 #workspaces {
-  background: #1e1e2e;
+  background: @background;
   border-radius: 10px;
   margin-left: 10px;
   padding-right: 0px;
@@ -108,43 +109,43 @@ tooltip {
 }
 
 #window {
-  color: #cba6f7;
+  color: @foreground;
   border-radius: 10px;
   margin-left: 10px;
   margin-right: 10px;
 }
 
 #clock {
-  color: #fab387;
+  color: @color3;
   border-radius: 0 10px 10px 0;
 }
 
 #network {
-  color: #f9e2af;
+  color: @color3;
   border-radius: 10px 0px 0px 10px;
   border-right: 0px;
 }
 
 #bluetooth {
-  color: #89b4fa;
+  color: @color4;
   border-radius: 0px 10px 10px 0px;
   margin-right: 10px;
 }
 
 #pulseaudio {
-  color: #89b4fa;
+  color: @color4;
   border-radius: 10px 0px 0px 10px;
 }
 
 #pulseaudio.microphone {
-  color: #cba6f7;
+  color: @color5;
   border-left: 0px;
   border-radius: 0px 10px 10px 0px;
   margin-right: 10px;
 }
 
 #battery {
-  color: #a6e3a1;
+  color: @color2;
   border-radius: 0 10px 10px 0;
   margin-right: 10px;
   border-left: 0px;
@@ -169,7 +170,7 @@ tooltip {
   margin-left: 20px;
   padding-right: 15px;
   border-right: 0;
-  color: #89b4fa;
+  color: @color4;
 }
 
 #image {
