@@ -12,7 +12,7 @@ Dotfiles for my Arch Linux Hyprland rice
 ## Key Features
 
 - Modern and sleek design
-- Custom themes with pywal
+- Pywal-based dynamic theming
 - TUI focused look
 
 ## ToDo
@@ -34,6 +34,8 @@ yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spiceti
 
 Useful tools and other dotfiles I used:
 
-- Inspiration: https://github.com/MartinFillon/dotfiles, https://github.com/soldoestech/hyprland and https://github.com/5hubham5ingh/kitty-panel
+- Based on: https://github.com/MartinFillon/dotfiles, https://github.com/soldoestech/hyprland
+
+- Fun features: https://github.com/5hubham5ingh/kitty-panel, https://github.com/raffaem/waybar-mediaplayer
 
 - Pywal: https://github.com/SeniorMatt/Mattthew-s-Dotfiles, https://github.com/eylles/pywal16-libadwaita
