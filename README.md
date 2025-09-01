@@ -17,7 +17,9 @@ Dotfiles for my Arch Linux Hyprland rice
 
 ## ToDo
 
+- make wofi menus (inspo: https://github.com/BinaryHarbinger/hyprdots)
 - add opacity control
+- might replace dunst with swaync
 - lock screen when laptop lid closed
 - optionaly add tty look to more apps (textfox, spotify-tui, etc.)
 - write an install script
