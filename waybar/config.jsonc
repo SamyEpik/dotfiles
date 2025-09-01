@@ -55,9 +55,10 @@
   },
 
   "pulseaudio": {
-    "format": "{icon} {volume}%",
+    "format": "{icon}  {volume}%",
     "format-muted": " Muted",
     "on-click": "pamixer -t",
+    "on-click-right": "hyprctl dispatch exec 'kitty --class floating wiremix'",
     "on-scroll-up": "pamixer -i 3",
     "on-scroll-down": "pamixer -d 3",
     "scroll-step": 5,
@@ -77,6 +78,7 @@
     "format-source": " {volume}%",
     "format-source-muted": " Muted",
     "on-click": "pamixer --default-source -t",
+    "on-click-right": "hyprctl dispatch exec 'kitty --class floating wiremix --tab recording'",
     "on-scroll-up": "pamixer --default-source -i 5",
     "on-scroll-down": "pamixer --default-source -d 5",
     "scroll-step": 5
