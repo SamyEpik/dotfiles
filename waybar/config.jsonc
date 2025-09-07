@@ -104,7 +104,8 @@
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "Disconnected ⚠",
     // "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
-    "on-click": "hyprctl dispatch exec 'kitty --class floating nmtui'" 
+    "on-click": "hyprctl dispatch exec 'kitty --class floating nmtui'",
+    "on-click-right": "hyprctl dispatch exec 'kitty --class floating btop -p 4'"
   },
 
   "bluetooth": {
