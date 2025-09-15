@@ -1,17 +1,16 @@
+
 @import url("/home/samuel/.cache/wal/colors-waybar.css");
+
 
 * {
     font-size: 16px;
 }
 
-
-
 window {
+    margin: 0px;
     background-color: transparent;
     border-radius: 10px;
-    margin: 20px;
 }
-
 
 
 #input {
@@ -31,7 +30,6 @@ window {
 }
 
 
-
 #outer-box {
     background-color: @background;
     border: 2px solid @color13;
@@ -39,7 +37,6 @@ window {
     padding: 6px;
     margin: 0;
 }
-
 
 #inner-box {
     margin: 4px;
