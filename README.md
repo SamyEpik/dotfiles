@@ -2,7 +2,7 @@
 
 Dotfiles for my Arch Linux Hyprland rice
 
-## Notes
+## System
 
 - OS: Arch Linux x86_64
 - Shell: zsh 5.9
@@ -11,17 +11,18 @@ Dotfiles for my Arch Linux Hyprland rice
 
 ## Key Features
 
-- Modern and sleek design
-- Pywal-based dynamic theming
+- Sleek and productive design
 - TUI focused look
+- Pywal-based dynamic theming
+- Wofi-based system menu
 
 ## ToDo
 
-- make wofi menus (inspo: https://github.com/BinaryHarbinger/hyprdots)
-- add opacity control
+- add choosable custom apps (browser, terminal, etc.)
+- create help page/documentation
 - might replace dunst with swaync
-- lock screen when laptop lid closed
 - optionaly add tty look to more apps (textfox, spotify-tui, etc.)
+- theme discord and spotfiy with pywal
 - write an install script
 
 ## Packages
@@ -32,11 +33,18 @@ Dotfiles for my Arch Linux Hyprland rice
 yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spicetify hyprpaper wofi dunst catppuccin-gtk-theme-mocha cliphist firefox discord spotify obsidian vscodium-bin thunar pamixer playerctl brightnessctl hyprshot zsh pipewire pipewire-pulse pipewire-audio libreoffice-extension-texmaths libreoffice-fresh noto-fonts noto-fonts-cjk noto-fonts-emoji kvantummanager qt5-wayland qt6-wayland swayidle batsignal adw-gtk-theme gradience python-pywal16 waypaper yazi wiremix
 ```
 
+## Getting Started
+
+- Clone this repo and install all packages
+- Keep the `dotfiles` directory in `$HOME`
+- Try *SUPER + A* to open the system menu 
+- Learn about this rice in the system menus help section
+
 ## Credit
 
 Useful tools and other dotfiles I used:
 
-- Based on: https://github.com/MartinFillon/dotfiles, https://github.com/soldoestech/hyprland
+- Based on: https://github.com/MartinFillon/dotfiles (hypr config), https://github.com/soldoestech/hyprland (hypr config), https://github.com/BinaryHarbinger/hyprdots (system menu)
 
 - Fun features: https://github.com/5hubham5ingh/kitty-panel, https://github.com/raffaem/waybar-mediaplayer
 
