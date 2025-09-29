@@ -18,11 +18,12 @@ Dotfiles for my Arch Linux Hyprland rice
 
 ## ToDo
 
-- add choosable custom apps (browser, terminal, etc.)
+- add choosable default apps (browser, terminal, etc.)
 - create help page/documentation
 - might replace dunst with swaync
-- optionaly add tty look to more apps (textfox, spotify-tui, etc.)
-- theme discord and spotfiy with pywal
+- option between tty or normal theme with more apps (textfox, etc.)
+- theme spicetify and spotify non TUI
+- link obsidian pywal template
 - write an install script
 
 ## Packages
@@ -47,15 +48,15 @@ pywalfox install
 
 - Clone this repo and install all packages
 - Keep the `dotfiles` directory in `$HOME`
-- Try *SUPER + A* to open the system menu 
+- Try *SUPER + A* to open the system menu
 - Learn about this rice in the system menus help section
 
 ## Credit
 
 Useful tools and other dotfiles I used:
 
-- Based on: https://github.com/MartinFillon/dotfiles (hypr config), https://github.com/soldoestech/hyprland (hypr config), https://github.com/BinaryHarbinger/hyprdots (system menu)
+- Based on: <https://github.com/MartinFillon/dotfiles> (hypr config), <https://github.com/soldoestech/hyprland> (hypr config), <https://github.com/BinaryHarbinger/hyprdots> (system menu)
 
-- Fun features: https://github.com/5hubham5ingh/kitty-panel, https://github.com/raffaem/waybar-mediaplayer
+- Fun features: <https://github.com/5hubham5ingh/kitty-panel>, <https://github.com/raffaem/waybar-mediaplayer>
 
-- Pywal: https://github.com/SeniorMatt/Mattthew-s-Dotfiles, https://github.com/eylles/pywal16-libadwaita
+- Pywal: <https://github.com/SeniorMatt/Mattthew-s-Dotfiles>, <https://github.com/eylles/pywal16-libadwaita>
