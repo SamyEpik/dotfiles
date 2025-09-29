@@ -225,6 +225,7 @@ theme_options() {
 
   if [ -n "$chosen" ]; then
     wal --theme "$chosen"
+    ~/dotfiles/scripts/post_theme_reload.sh
   else
     echo "No theme selected."
   fi
