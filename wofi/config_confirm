@@ -13,5 +13,4 @@ insensitive=true
 gtk_dark=true
 normal_window=false
 hide_scroll=true
-hide_search=true
 sort_order=alphabetical

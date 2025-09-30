@@ -66,39 +66,88 @@ reloads_light() {
 }
 
 reloads_require_restart() {
+  handle_error() {
+    local app_name="$1"
+    local action="$2" # e.g., "launch" or "apply"
+    local output="$3"
+    local err_msg="$app_name $action failed: $output"
+    echo "$err_msg"
+    notify-send -u critical "Theme Reloader" "$err_msg"
+  }
+
   # --- Spotify ---
-  pkill spotify || true
-  if ! out=$(spicetify apply 2>&1); then
-    err_msg="Spicetify Failed: $out"
-    echo "$err_msg"
-    notify-send -u critical "Theme Reloader" "$err_msg"
-  fi
-  if ! out=$(hyprctl dispatch exec "[workspace 9 silent] spotify" 2>&1); then
-    err_msg="Spotify launch failed: $out"
-    echo "$err_msg"
-    notify-send -u critical "Theme Reloader" "$err_msg"
+  # -x flag ensures an exact match for the process name 'spotify'
+  if pgrep -x spotify >/dev/null; then
+    echo "Spotify is running. Restarting to apply theme..."
+    pkill spotify || true
+
+    if ! out=$(spicetify apply 2>&1); then
+      handle_error "Spicetify" "apply" "$out"
+    fi
+    # Wait a moment for the process to fully terminate before relaunching
+    sleep 1
+    if ! out=$(hyprctl dispatch exec "[workspace 9 silent] spotify" 2>&1); then
+      handle_error "Spotify" "launch" "$out"
+    fi
   fi
 
   # --- Vesktop ---
-  pkill -f vesktop || true
-  sleep 2 # Give it a moment to die gracefully
-  if ! out=$(hyprctl dispatch exec vesktop 2>&1); then
-    err_msg="Vesktop launch failed: $out"
-    echo "$err_msg"
-    notify-send -u critical "Theme Reloader" "$err_msg"
+  # -f flag matches against the full command line, similar to your original pkill
+  if pgrep -f vesktop >/dev/null; then
+    echo "Vesktop is running. Restarting..."
+    pkill -f vesktop || true
+    sleep 2 # Give it a moment to die gracefully
+    if ! out=$(hyprctl dispatch exec vesktop 2>&1); then
+      handle_error "Vesktop" "launch" "$out"
+    fi
   fi
 
-  pkill -f obsidian || true
-  sleep 1 # Give it a moment to die gracefully
-  if ! out=$(hyprctl dispatch exec obsidian 2>&1); then
-    err_msg="Obsidian launch failed: $out"
-    echo "$err_msg"
-    notify-send -u critical "Theme Reloader" "$err_msg"
+  # --- Obsidian ---
+  if pgrep -f obsidian >/dev/null; then
+    echo "Obsidian is running. Restarting..."
+    pkill -f obsidian || true
+    sleep 1 # Give it a moment to die gracefully
+    if ! out=$(hyprctl dispatch exec obsidian 2>&1); then
+      handle_error "Obsidian" "launch" "$out"
+    fi
+  fi
+
+  ## --- DarkReader ---
+  reload_darkreader
+}
+
+reload_darkreader() {
+  if pgrep -x firefox >/dev/null; then
+    notify-send "Theme Reloader" "Firefox is running. Please quit Firefox to reload DarkReader" -u critical
+    mode_array=("  <span weight=\"normal\">Try Reload</span>" "  <span weight=\"normal\">Skip DarkReader</span>")
+    mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 145 --width 430 --sort-order default --prompt "Firefox is running!" --normal-window)
+    mode_index=-1
+    for i in "${!mode_array[@]}"; do
+      if [[ "${mode_array[$i]}" == "$mode" ]]; then
+        mode_index=$i
+        break
+      fi
+    done
+
+    case $mode_index in
+    0)
+      reload_darkreader
+      ;;
+    1)
+      echo "Skipping DarkReader reload"
+      ;;
+    *)
+      echo "No option selected"
+      ;;
+    esac
+  else
+    notify-send "Theme Reloader" "Firefox quickly opening and closing is intended behaviour.\nThis is unfortunately the only way to reload DarkReader." -u normal
+    $HOME/dotfiles/scripts/darkreader_reload.py
   fi
 }
 
 mode_array=("  <span weight=\"normal\">Reload All</span>" "  <span weight=\"normal\">Skip Restarts</span>" "  <span weight=\"normal\">Only Wallpaper</span>")
-mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 210 --width 340 --sort-order default)
+mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 210 --width 340 --sort-order default --hide-search)
 mode_index=-1
 for i in "${!mode_array[@]}"; do
   if [[ "${mode_array[$i]}" == "$mode" ]]; then
