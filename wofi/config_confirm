@@ -1,0 +1,17 @@
+width=90
+height=420
+location=center
+show=dmenu
+prompt=Select an option:
+filter_rate=100
+allow_markup=true
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+insensitive=true
+gtk_dark=true
+normal_window=false
+hide_scroll=true
+hide_search=true
+sort_order=alphabetical
