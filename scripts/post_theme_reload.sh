@@ -1,6 +1,7 @@
 #!/bin/bash
 LOCKFILE="/tmp/post_theme_reload.lock"
 WALLPAPER_PATH=""
+FORCE_LIGHT=0
 
 # This ensures the lockfile is removed even if the script is interrupted.
 cleanup() {
@@ -9,15 +10,32 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 while [[ $# -gt 0 ]]; do
-  case $1 in
+  case "$1" in
   --wallpaper)
-    WALLPAPER_PATH="$2"
-    shift 2
+    if [[ $# -ge 2 && "$2" != -* ]]; then
+      WALLPAPER_PATH="$2"
+      shift 2
+    else
+      WALLPAPER_PATH=""
+      shift 1
+    fi
+    ;;
+  --force-light)
+    echo "Forcing light, wont prompt for scope"
+    FORCE_LIGHT=1
+    shift
+    ;;
+  --)
+    shift
+    break
+    ;;
+  -*)
+    echo "Unknown option: $1" >&2
+    echo "Usage: $0 [--wallpaper [/path/to/image]] [--force-light]" >&2
+    exit 1
     ;;
   *)
-    echo "Unknown option: $1"
-    echo "Usage: $0 [--wallpaper /path/to/image]"
-    exit 1
+    shift
     ;;
   esac
 done
@@ -146,15 +164,19 @@ reload_darkreader() {
   fi
 }
 
-mode_array=("  <span weight=\"normal\">Reload All</span>" "  <span weight=\"normal\">Skip Restarts</span>" "  <span weight=\"normal\">Only Wallpaper</span>")
-mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 210 --width 340 --sort-order default --hide-search)
 mode_index=-1
-for i in "${!mode_array[@]}"; do
-  if [[ "${mode_array[$i]}" == "$mode" ]]; then
-    mode_index=$i
-    break
-  fi
-done
+if ! ((FORCE_LIGHT)); then
+  mode_array=("  <span weight=\"normal\">Reload All</span>" "  <span weight=\"normal\">Skip Restarts</span>" "  <span weight=\"normal\">Only Wallpaper</span>")
+  mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 210 --width 340 --sort-order default --hide-search)
+  for i in "${!mode_array[@]}"; do
+    if [[ "${mode_array[$i]}" == "$mode" ]]; then
+      mode_index=$i
+      break
+    fi
+  done
+else
+  mode_index=1
+fi
 
 case $mode_index in
 0)
