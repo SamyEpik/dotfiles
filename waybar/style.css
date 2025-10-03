@@ -14,12 +14,17 @@ window#waybar {
   color: @foreground;
 }
 
+#waybar .modules-right {
+  padding-right: 20px;
+}
+
 tooltip {
   background: @background;
   border-radius: 10px;
   border-width: 2px;
   border-style: solid;
-  border-color: @color0;
+  border-color: @color5;
+  opacity: 0.9;
 }
 
 #workspaces button {
@@ -36,6 +41,7 @@ tooltip {
   color: #a6adc8;
   background: #eba0ac;
   border-radius: 10px;
+  margin-top: 2px;
 }
 
 #workspaces button.urgent {
@@ -47,6 +53,8 @@ tooltip {
 #workspaces button:hover {
   color: @foreground;
   border-radius: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 #custom-power_profile,
@@ -70,7 +78,7 @@ tooltip {
 #custom-mediacontrols,
 #backlight {
   background: @background;
-  opacity: 0.6;
+  opacity: 0.8;
   padding: 0px 10px;
   margin-top: 20px;
   border: 2px solid @color0;
@@ -91,7 +99,7 @@ tooltip {
 
 #tray {
   border-radius: 10px;
-  margin-right: 20px;
+  margin-left: 10px;
 }
 
 #workspaces {
@@ -113,6 +121,10 @@ tooltip {
   border-radius: 10px;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+window#waybar.empty #window {
+  opacity: 0;
 }
 
 #clock {
@@ -141,7 +153,6 @@ tooltip {
   color: @color5;
   border-left: 0px;
   border-radius: 0px 10px 10px 0px;
-  margin-right: 10px;
 }
 
 #battery {
