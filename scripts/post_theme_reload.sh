@@ -84,59 +84,57 @@ reloads_light() {
 }
 
 reloads_require_restart() {
-  handle_error() {
-    local app_name="$1"
-    local action="$2" # e.g., "launch" or "apply"
-    local output="$3"
-    local err_msg="$app_name $action failed: $output"
-    echo "$err_msg"
-    notify-send -u critical "Theme Reloader" "$err_msg"
-  }
-
   # --- Spotify ---
-  # -x flag ensures an exact match for the process name 'spotify'
   if pgrep -x spotify >/dev/null; then
     echo "Spotify is running. Restarting to apply theme..."
     pkill spotify || true
 
-    if ! out=$(spicetify apply 2>&1); then
+    if ! out=$(spicetify apply); then
       handle_error "Spicetify" "apply" "$out"
     fi
-    # Wait a moment for the process to fully terminate before relaunching
-    sleep 1
-    if ! out=$(hyprctl dispatch exec "[workspace 9 silent] spotify" 2>&1); then
-      handle_error "Spotify" "launch" "$out"
+    if ! out=$(spicetify restart); then
+      handle_error "Spicetify" "restart" "$out"
     fi
   fi
 
   # --- Vesktop ---
-  # -f flag matches against the full command line, similar to your original pkill
   if pgrep -f vesktop >/dev/null; then
-    echo "Vesktop is running. Restarting..."
-    pkill -f vesktop || true
-    sleep 2 # Give it a moment to die gracefully
-    if ! out=$(hyprctl dispatch exec vesktop 2>&1); then
-      handle_error "Vesktop" "launch" "$out"
+    echo "Vesktop is running. Reloading..."
+    vesktop_addr="$(
+      hyprctl -j clients |
+        jq -r '.[] | select((.class|test("(?i)vesktop|discord")) or (.title|test("(?i)vesktop|discord"))) | .address' |
+        head -n1 || true
+    )"
+    if [[ -n "${vesktop_addr:-}" ]]; then
+      echo "vesktop_addr: $vesktop_addr"
+      if ! out=$(hyprctl dispatch sendshortcut "CTRL, R, address:$vesktop_addr"); then
+        handle_error "Vesktop" "reload" "$out"
+      fi
+    else
+      handle_error "Vesktop" "reload" "Couldn't find vesktop/discord window"
     fi
   fi
+  sleep 1
 
   # --- Obsidian ---
-  if pgrep -f obsidian >/dev/null; then
-    echo "Obsidian is running. Restarting..."
-    pkill -f obsidian || true
-    sleep 1 # Give it a moment to die gracefully
-    if ! out=$(hyprctl dispatch exec obsidian 2>&1); then
-      handle_error "Obsidian" "launch" "$out"
-    fi
-  fi
+  reload_obsidian
 
   ## --- DarkReader ---
   reload_darkreader
 }
 
+handle_error() {
+  local app_name="$1"
+  local action="$2" # e.g., "launch" or "apply"
+  local output="$3"
+  local err_msg="$app_name $action failed: $output"
+  echo "$err_msg"
+  notify-send -u critical "Theme Reloader" "$err_msg"
+}
+
 reload_darkreader() {
   if pgrep -x firefox >/dev/null; then
-    notify-send "Theme Reloader" "Firefox is running. Please quit Firefox to reload DarkReader" -u critical
+    notify-send "Theme Reloader" "Firefox is running. Please quit Firefox to reload DarkReader" -u normal
     mode_array=("  <span weight=\"normal\">Try Reload</span>" "  <span weight=\"normal\">Skip DarkReader</span>")
     mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 145 --width 430 --sort-order default --prompt "Firefox is running!" --normal-window)
     mode_index=-1
@@ -161,6 +159,77 @@ reload_darkreader() {
   else
     notify-send "Theme Reloader" "Firefox quickly opening and closing is intended behaviour.\nThis is unfortunately the only way to reload DarkReader." -u normal
     $HOME/dotfiles/scripts/darkreader_reload.py
+  fi
+}
+
+reload_obsidian() {
+  if pgrep -f obsidian >/dev/null; then
+    echo "Obsidian is running. Reloading..."
+
+    obsidian_cfg="$HOME/.config/obsidian/obsidian.json"
+
+    # Ensure Obsidian native config exists
+    if [[ ! -f "$obsidian_cfg" ]]; then
+      handle_error "Obsidian" "restart" \
+        "Couldn't find ~/.config/obsidian/obsidian.json. Is Obsidian installed natively?"
+      exit 1
+    fi
+
+    # Extract the last/opened vault path from obsidian.json
+    vault_path="$(
+      jq -er '
+        .vaults
+        | (to_entries[] | select(.value.open == true) | .value.path)
+      ' "$obsidian_cfg" 2>/dev/null
+    )" || {
+      handle_error "Obsidian" "restart" \
+        "Failed to read vault path from ~/.config/obsidian/obsidian.json"
+      exit 1
+    }
+
+    # Check hotkeys.json for Ctrl+Shift+R on app:reload
+    hotkeys="$vault_path/.obsidian/hotkeys.json"
+    if [[ ! -f "$hotkeys" ]]; then
+      handle_error "Obsidian" "restart" \
+        "Keybind CTRL + SHIFT + R isn't set to reload Obsidian.
+        Set it in Obsidian: Settings > Hotkeys > Reload app without saving."
+      exit 1
+    fi
+
+    # Reload Obsidian with CTRL + SHIFT + R (only if the hotkey exists)
+    if jq -e '
+        (.["app:reload"] // [])
+        | any(.key == "R" and ((.modifiers | index("Mod")) and (.modifiers | index("Shift"))))
+      ' "$hotkeys" >/dev/null; then
+
+      obsidian_addr="$(
+        hyprctl -j clients |
+          jq -r '
+            .[]
+            | select(
+                (.class | test("obsidian"))
+              )
+            | .address
+          ' | head -n1 || true
+      )"
+
+      if [[ -n "${obsidian_addr:-}" ]]; then
+        if ! hyprctl dispatch sendshortcut "CTRL, S, address:$obsidian_addr"; then
+          handle_error "Vesktop" "save" "Failed to send Ctrl+S"
+        fi
+        sleep 0.3
+        if ! out=$(hyprctl dispatch sendshortcut "CTRL SHIFT, R, address:$obsidian_addr" 2>&1); then
+          handle_error "Vesktop" "reload" "$out"
+        fi
+      else
+        handle_error "Vesktop" "reload" "Couldn't find vesktop/discord window"
+      fi
+
+    else
+      handle_error "Obsidian" "restart" \
+        "Keybind CTRL + SHIFT + R isn't set to reload Obsidian.
+        Set it in Obsidian: Settings > Hotkeys > Reload app without saving."
+    fi
   fi
 }
 
