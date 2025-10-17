@@ -101,8 +101,8 @@
       "car": "",
       "default": [
         "",
-        "",
-        ""
+        " ",
+        " "
       ]
     },
     "tooltip-format": "Toggle Mute: 󰍽\nOpen Wiremix Playback: 󰍽\n\nVolume: {volume}%\n\n{desc}"
