@@ -22,6 +22,7 @@ Dotfiles for my Arch Linux Hyprland rice
   - remove the progress bar (or make it optional)
   - keep the image, but put a Previous left of it
   - make the image interactive: hover shows pause/play, click executes
+- detect newly plugged in audio devices and ask to switch
 - add "please resolve manually" and refer to docs on critical post theme reload notif
 - add choosable default apps (browser, terminal, etc.)
 - create help page/documentation
