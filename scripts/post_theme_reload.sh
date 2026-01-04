@@ -76,7 +76,12 @@ reloads_light() {
   fi
 
   # --- Gradience ---
-  if ! out=$(gradience-cli apply -p ~/.cache/wal/pywal.json --gtk both 2>&1); then
+  if ! out=$(
+    {
+      gradience-cli apply -p ~/.cache/wal/pywal.json --gtk both &&
+        install -m 0644 ~/.config/gtk-4.0/gtk.css /usr/local/share/gtk-overrides/gtk.css
+    } 2>&1
+  ); then
     err_msg="Gradience failed: $out"
     echo "$err_msg"
     notify-send -u critical "Theme Reloader" "$err_msg"

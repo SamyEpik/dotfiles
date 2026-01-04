@@ -37,7 +37,7 @@ Dotfiles for my Arch Linux Hyprland rice
 - install [yay](https://github.com/Jguer/yay?tab=readme-ov-file#installation) first
 
 ```bash
-yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spicetify hyprpaper wofi dunst catppuccin-gtk-theme-mocha cliphist firefox vesktop-bin spotify obsidian vscodium-bin thunar pamixer playerctl brightnessctl hyprshot zsh pipewire pipewire-pulse pipewire-audio libreoffice-extension-texmaths libreoffice-fresh noto-fonts noto-fonts-cjk noto-fonts-emoji kvantummanager qt5-wayland qt6-wayland swayidle batsignal adw-gtk-theme gradience python-pywal16 waypaper yazi wiremix python-pywalfox python-selenium geckodriver fd
+yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spicetify hyprpaper wofi dunst catppuccin-gtk-theme-mocha cliphist firefox vesktop-bin spotify obsidian vscodium-bin thunar pamixer playerctl brightnessctl hyprshot zsh pipewire pipewire-pulse pipewire-audio libreoffice-extension-texmaths libreoffice-fresh noto-fonts noto-fonts-cjk noto-fonts-emoji kvantummanager qt5-wayland qt6-wayland swayidle batsignal adw-gtk-theme gradience python-pywal16 waypaper yazi wiremix python-pywalfox python-selenium geckodriver fd greetd greetd-regreet
 ```
 
 ### Post install configuration
@@ -46,9 +46,15 @@ yay -S waybar bluetuith-bin btop betterdiscordctl kitty swaylock-effects spiceti
 
 > Also this is not nearly all of configuration required
 
+- Pywalfox:
+
 ```bash
 pywalfox install
 ```
+
+- Greetd:
+
+Setup [greetd-regreet](https://github.com/rharish101/ReGreet?tab=readme-ov-file#usage) for Hyprland and follow ./greetd-regreet/SETUP.md
 
 ## Getting Started
 

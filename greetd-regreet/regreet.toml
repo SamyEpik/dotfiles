@@ -1,0 +1,20 @@
+# Further information: https://github.com/rharish101/ReGreet/blob/main/regreet.sample.toml
+
+[GTK]
+application_prefer_dark_theme = true
+theme_name = "adw-gtk3"
+font_name = "FiraCode Nerd Font Mono"
+icon_theme_name = "Papirus-Dark"
+cursor_theme_name = "Catppuccin-Mocha-Dark-Cursors"
+
+[commands]
+reboot = [ "systemctl", "reboot" ]
+poweroff = [ "systemctl", "poweroff" ]
+
+[appearence]
+greeting_msg = "Welcome back!"
+
+[widget.clock]
+format = "%a %H:%M"
+resolution = "500ms"
+label_width = 150
