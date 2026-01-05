@@ -1,5 +1,5 @@
-After installing `greetd` and `greetd-regreet` link `./regreet.toml` to `/etc/greetd/regreet.toml`
+After installing `greetd` and `greetd-regreet` move `./regreet.toml` to `/etc/greetd/`
 
 ```bash
-sudo ln -sf ~/dotfiles/greetd-regreet/regreet.toml /etc/greetd/regreet.toml
+sudo mv -f ~/dotfiles/greetd-regreet/regreet.toml /etc/greetd/regreet.toml
 ```
