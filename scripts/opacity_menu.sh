@@ -47,7 +47,7 @@ escape_regex() {
 escaped_class="$(printf '%s' "$class" | escape_regex)"
 
 # --- Apply the rule (runtime only) ---
-cmd=(hyprctl keyword windowrulev2 "opacity ${opacity}, class:^(${escaped_class})$")
+cmd=(hyprctl keyword windowrule "match:class ^(${escaped_class})$, opacity ${opacity}, ")
 if ! "${cmd[@]}"; then
   echo "Failed to apply opacity rule." >&2
   exit 1
