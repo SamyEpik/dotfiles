@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-cd ~
-
 # Usage Information
 usage() {
   echo -e "\n Usage:
@@ -71,7 +69,7 @@ menu() {
 logout_options() {
   options_array=("" "󰷛" "" "󰤄" "" "󰍃")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 370 --sort-order default)
+  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 390 --sort-order default)
 
   index=-1
   for i in "${!options_array[@]}"; do
@@ -109,7 +107,7 @@ logout_options() {
 help_options() {
   options_array=("" "󰌌" "󰞋" "")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 255 --sort-order default)
+  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 275 --sort-order default)
 
   index=-1
   for i in "${!options_array[@]}"; do
@@ -141,7 +139,7 @@ help_options() {
 rice_settings() {
   options_array=("" "" "" "" "")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 310 --sort-order default)
+  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 335 --sort-order default)
 
   index=-1
   for i in "${!options_array[@]}"; do
@@ -176,7 +174,7 @@ rice_settings() {
 reload_options() {
   options_array=("" "  <span weight=\"normal\">Waybar</span>" "  <span weight=\"normal\">Pywal</span>" "  <span weight=\"normal\">WiFi firmware</span>" "  <span weight=\"normal\">Hyprland</span>")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_sidebar --height 310 --width 330 --sort-order default)
+  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_sidebar --height 345 --width 330 --sort-order default)
 
   index=-1
   for i in "${!options_array[@]}"; do

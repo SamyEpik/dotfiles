@@ -1,92 +1,48 @@
 @import url("/home/samuel/.cache/wal/colors-waybar.css");
 
 * {
-    font-size: 30px;
+  font-size: 30px;
 }
-
-
 
 window {
-    background-color: transparent;
-    border-radius: 10px;
-    margin: 20px;
+  background-color: transparent;
+  border-radius: 10px;
 }
-
-
-
-#input {
-    font-size: 16px;
-    padding: 0.25em 0.6em;  
-    margin: 10px 10px 4px 10px;
-    border: none;
-    font-weight: 700;
-    background-color: @background;
-    outline: none;
-    border-radius: 12px;
-}
-
-#input:focus {
-    border: none;
-    margin-bottom: 4px;
-    box-shadow: inset 0 0 0 2px @color13;
-}
-
-
 
 #outer-box {
-    background-color: @background;
-    border: 2px solid @color13;
-    border-radius: 10px;
-    padding: 6px;
-    margin: 0;
+  background-color: @background;
+  border: 2px solid @color13;
+  border-radius: 10px;
+  padding: 6px;
+  margin: 0;
+  padding-top: 15px;
 }
-
 
 #inner-box {
-    margin: 4px;
-    border: 4px solid transparent;
-    color: #cdd6f4;
-    font-weight: 600;
-    border-radius: 12px;
+  margin: 4px;
+  border: 4px solid transparent;
 }
-
-#scroll {
-    margin: 6px 0;
-    border: none;
-    border-radius: 10px;
-}
-
-
-#img {
-    margin-right: 0.5em;
-}
-
-#img:selected {
-    border-radius: 10px;
-}
-
 
 #entry {
-    margin: 2px 4px;
-    padding: 0.2em 0.5em;   
-    border: none;
-    border-radius: 10px;
-    transition: 100ms ease-in-out;
+  margin: 2px 4px;
+  padding: 0.2em 0.5em;
+  border: none;
+  border-radius: 10px;
+  transition: 100ms ease-in-out;
 }
 
 #entry:selected {
-    margin: 2px 4px;
-    padding: 0.2em 0.5em;
-    border-radius: 10px;
-    background-color: @color13;
-    color: @color0;
-    border-left: 2px solid @color11;
+  margin: 2px 4px;
+  padding: 0.2em 0.5em;
+  border-radius: 10px;
+  background-color: @color13;
+  color: @color0;
+  border-left: 2px solid @color11;
 }
 
 #text:selected {
-    margin: 0;
-    border: none;
-    border-radius: 10px;
-    color: @color0;
+  margin: 0;
+  border: none;
+  border-radius: 10px;
+  color: @color0;
 }
-
