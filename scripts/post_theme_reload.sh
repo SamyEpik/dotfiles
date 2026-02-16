@@ -95,7 +95,7 @@ reloads_require_restart() {
     pkill spotify || true
 
     if ! out=$(spicetify apply); then
-      handle_error "Spicetify" "apply" "$out"
+      handle_error "Spicetify" "apply" "Please manually apply spicetify\n$out"
     fi
     if ! out=$(spicetify restart); then
       handle_error "Spicetify" "restart" "$out"
