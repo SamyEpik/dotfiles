@@ -77,7 +77,8 @@ tooltip {
 #spotify,
 #image,
 #custom-mediaplayer,
-#custom-mediacontrols,
+#custom-prev,
+#custom-next,
 #backlight {
   background: @background;
   opacity: 0.8;
@@ -189,6 +190,7 @@ window#waybar.empty #window {
 #image {
   border-radius: 10px 0px 0px 10px;
   border-right: 0;
+  padding-right: 3px;
 }
 
 #custom-mediaplayer {
@@ -197,7 +199,13 @@ window#waybar.empty #window {
   border-right: 0;
 }
 
-#custom-mediacontrols {
+#custom-next {
+  font-size: 16px;
+  border-radius: 0px 10px 10px 0px;
+  margin-right: 10px;
+}
+
+#custom-next {
   font-size: 16px;
   border-radius: 0px 10px 10px 0px;
   margin-right: 10px;

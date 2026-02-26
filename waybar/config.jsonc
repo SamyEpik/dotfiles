@@ -13,9 +13,10 @@
   ],
   "modules-center": [
     "hyprland/window",
-    "image",
+    "image#album-art",
+    "custom/prev",
     "custom/mediaplayer",
-    "custom/mediacontrols"
+    "custom/next"
   ],
   "modules-right": [
     "network",
@@ -195,10 +196,11 @@
     "tooltip-format": "Open Dashboard: 󰍽",
     "on-click": "kitty ~/.config/hypr/scripts/dashboard.sh"
   },
-  "image": {
+  "image#album-art": {
     "path": "/tmp/waybar-mediaplayer-art",
     "on-click": "hyprctl dispatch workspace 9",
-    "size": 32,
+    "size": 40,
+    "interval": 5,
     "signal": 4
   },
   "custom/mediaplayer": {
@@ -212,7 +214,12 @@
     "min-length": 20,
     "max-length": 20
   },
-  "custom/mediacontrols": {
+  "custom/prev": {
+    "format": "󰒮",
+    "tooltip-format": "Previous",
+    "on-click": "exec playerctl -p spotify previous"
+  },
+  "custom/next": {
     "format": "󰒭",
     "tooltip-format": "Next",
     "on-click": "exec playerctl -p spotify next"
