@@ -13,8 +13,8 @@
   ],
   "modules-center": [
     "hyprland/window",
-    "image#album-art",
     "custom/prev",
+    "image#album-art",
     "custom/mediaplayer",
     "custom/next"
   ],
@@ -204,7 +204,7 @@
     "signal": 4
   },
   "custom/mediaplayer": {
-    "exec": "$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer monitor",
+    "exec": "tail -f /tmp/waybar-mediaplayer-output",
     "return-type": "json",
     "format": "{}",
     "on-click": "exec playerctl -p spotify play-pause",
