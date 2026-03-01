@@ -34,16 +34,6 @@
     "separate-outputs": true
   },
   "hyprland/workspaces": {
-    "format": "{windows}",
-    "format-window-separator": "",
-    "workspace-taskbar": {
-      "enable": true,
-      "update-active-window": true,
-      "format": "{icon}",
-      "icon-size": 20,
-      "icon-theme": "oomox-Catppuccin-Mocha",
-      "on-click-window": "~/dotfiles/scripts/focus-window.sh {address} {button}"
-    },
     "all-outputs": false,
     "disable-scroll": true,
     "on-click": "activate"
