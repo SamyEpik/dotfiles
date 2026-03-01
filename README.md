@@ -60,7 +60,7 @@ Setup [greetd-regreet](https://github.com/rharish101/ReGreet?tab=readme-ov-file#
 
 - Clone this repo and install all packages
 - Keep the `dotfiles` directory in `$HOME`
-- Try *SUPER + A* to open the system menu
+- Try _SUPER + A_ to open the system menu
 - Learn about this rice in the system menus help section
 
 ## Credit
