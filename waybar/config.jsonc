@@ -193,8 +193,8 @@
   },
   "custom/arch": {
     "format": "",
-    "tooltip-format": "Open Dashboard: 󰍽",
-    "on-click": "kitty ~/.config/hypr/scripts/dashboard.sh"
+    "tooltip-format": "Open System Menu: 󰍽",
+    "on-click": "~/.config/scripts/system_menu.sh --menu"
   },
   "image#album-art": {
     "path": "/tmp/waybar-mediaplayer-art",
