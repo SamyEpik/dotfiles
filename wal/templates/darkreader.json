@@ -12,7 +12,7 @@
         "stylesheet": "",
         "darkSchemeBackgroundColor": "{color0}",
         "darkSchemeTextColor": "{color15}",
-        "lightSchemeBackgroundColor": "#{color0.lighten(15%)}",
+        "lightSchemeBackgroundColor": "{color0.lighten(15%)}",
         "lightSchemeTextColor": "{color15}",
         "scrollbarColor": "auto",
         "selectionColor": "auto",
