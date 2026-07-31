@@ -95,7 +95,7 @@ reloads_require_restart() {
     pkill spotify || true
 
     if ! out=$(spicetify apply); then
-      handle_error "Spicetify" "apply" "Please manually apply spicetify\n$out"
+      handle_error "Spicetify" "apply" "Please manually apply spicetify. Try spicetify backup apply! \n$out"
     fi
     if ! out=$(spicetify restart); then
       handle_error "Spicetify" "restart" "$out"
@@ -163,6 +163,7 @@ reload_darkreader() {
     esac
   else
     notify-send "Theme Reloader" "Firefox quickly opening and closing is intended behaviour.\nThis is unfortunately the only way to reload DarkReader." -u normal
+    pkill -f firefox
     $HOME/dotfiles/scripts/darkreader_reload.py
   fi
 }
@@ -227,7 +228,7 @@ reload_obsidian() {
           handle_error "Vesktop" "reload" "$out"
         fi
       else
-        handle_error "Vesktop" "reload" "Couldn't find vesktop/discord window"
+        handle_error "Vesktop" "reload" "Couldn't find vesktop/discord window. Try manually restarting it!"
       fi
 
     else
