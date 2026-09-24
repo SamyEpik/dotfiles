@@ -122,13 +122,13 @@ help_options() {
     menu
     ;;
   1)
-    ~/dotfiles/scripts/list_keybinds.sh
+    ~/.dotfiles/scripts/list_keybinds.sh
     ;;
   2)
     echo "Not implemented yet!"
     ;;
   3)
-    firefox https://github.com/samyepik/dotfiles
+    firefox https://github.com/samyepik/.dotfiles
     ;;
   *)
     echo "No option selected"
@@ -189,13 +189,13 @@ reload_options() {
     rice_settings
     ;;
   1)
-    bash ~/dotfiles/scripts/reload_waybar.sh
+    bash ~/.dotfiles/scripts/reload_waybar.sh
     ;;
   2)
     wal -R
     ;;
   3)
-    kitty --class floating ~/dotfiles/scripts/pci-rescan-wifi.sh
+    kitty --class floating ~/.dotfiles/scripts/pci-rescan-wifi.sh
     ;;
   4)
     hyprctl reload
@@ -223,7 +223,7 @@ theme_options() {
 
   if [ -n "$chosen" ]; then
     wal --theme "$chosen"
-    ~/dotfiles/scripts/post_theme_reload.sh
+    ~/.dotfiles/scripts/post_theme_reload.sh
   else
     echo "No theme selected."
   fi
@@ -259,11 +259,11 @@ appearence_options() {
 }
 
 scaling_settings() {
-  $HOME/dotfiles/scripts/scale_menu.sh
+  $HOME/.dotfiles/scripts/scale_menu.sh
 }
 
 opacity_settings() {
-  $HOME/dotfiles/scripts/opacity_menu.sh
+  $HOME/.dotfiles/scripts/opacity_menu.sh
 }
 
 # Check for flags and validate input

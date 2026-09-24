@@ -87,7 +87,7 @@ read width height rr x y < <(
 }
 
 # ask Python helper to compute clean/snap using the same method as your snippet
-mapfile -t lines < <($HOME/dotfiles/scripts/scale_calculator.py "$mon" "${allowed_scales[@]}")
+mapfile -t lines < <($HOME/.dotfiles/scripts/scale_calculator.py "$mon" "${allowed_scales[@]}")
 
 # build menu + mapping arrays
 declare -a menu_items=()

@@ -54,7 +54,7 @@ Setup [greetd-regreet](https://github.com/rharish101/ReGreet?tab=readme-ov-file#
 ## Getting Started
 
 - Clone this repo and install all packages
-- Keep the `dotfiles` directory in `$HOME`
+- Keep the `.dotfiles` directory as `$HOME/.dotfiles`
 - Try _SUPER + A_ to open the system menu
 - Learn about this rice in the system menus help section
 
