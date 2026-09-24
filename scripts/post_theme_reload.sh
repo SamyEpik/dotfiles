@@ -164,7 +164,7 @@ reload_darkreader() {
   else
     notify-send "Theme Reloader" "Firefox quickly opening and closing is intended behaviour.\nThis is unfortunately the only way to reload DarkReader." -u normal
     pkill -f firefox
-    $HOME/dotfiles/scripts/darkreader_reload.py
+    $HOME/.dotfiles/scripts/darkreader_reload.py
   fi
 }
 

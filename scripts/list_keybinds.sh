@@ -351,7 +351,7 @@ fi
 menu_input="$display"
 
 # Optional numeric width/height for wofi (ignore non-numeric like '35em')
-wofi_args="--dmenu --style $HOME/dotfiles/wofi/style_keybinds_list.css --allow-markup --prompt Keybinds"
+wofi_args="--dmenu --style $HOME/.dotfiles/wofi/style_keybinds_list.css --allow-markup --prompt Keybinds"
 case "$kb_hint_width" in
   ''|*[!0-9]*) : ;;
   *) wofi_args="$wofi_args --width $kb_hint_width" ;;
