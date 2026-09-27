@@ -75,16 +75,17 @@ reloads_light() {
     notify-send -u critical "Theme Reloader" "$err_msg"
   fi
 
-  # --- Gradience ---
-  if ! out=$(
-    {
-      gradience-cli apply -p ~/.cache/wal/pywal.json --gtk both &&
-        install -m 0644 ~/.config/gtk-4.0/gtk.css /usr/local/share/gtk-overrides/gtk.css
-    } 2>&1
-  ); then
-    err_msg="Gradience failed: $out"
-    echo "$err_msg"
-    notify-send -u critical "Theme Reloader" "$err_msg"
+  # --- GTK-3 and GTK-4 ---
+  if [[ -f ~/.cache/wal/gtk.css ]]; then
+    if ! out=$({ mkdir -p ~/.config/gtk-3.0 && atomic_copy ~/.cache/wal/gtk.css ~/.config/gtk-3.0/gtk.css; } 2>&1); then
+      handle_error "GTK-3" "copy" "Could not update ~/.config/gtk-3.0/gtk.css\n$out"
+    fi
+    if ! out=$({ mkdir -p ~/.config/gtk-4.0 && atomic_copy ~/.cache/wal/gtk.css ~/.config/gtk-4.0/gtk.css; } 2>&1); then
+      handle_error "GTK-4" "copy" "Could not update ~/.config/gtk-4.0/gtk.css\n$out"
+    fi
+    if ! out=$(install -Dm644 ~/.cache/wal/gtk.css /usr/local/share/gtk-overrides/gtk.css 2>&1); then
+      handle_error "GTK" "install override" "$out"
+    fi
   fi
 }
 
@@ -136,6 +137,11 @@ handle_error() {
   echo "$err_msg"
   notify-send -u critical "Theme Reloader" "$err_msg"
 }
+
+atomic_copy() { cp "$1" "$2.tmp" && mv -f "$2.tmp" "$2" || {
+  rm -f "$2.tmp"
+  return 1
+}; }
 
 reload_darkreader() {
   if pgrep -x firefox >/dev/null; then
