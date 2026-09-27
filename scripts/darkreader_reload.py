@@ -8,11 +8,12 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 PROFILE = os.path.expanduser(
-    "/home/samuel/.mozilla/firefox/2z1elovw.default-release-1776979147363"
+    "/home/samuel/.config/mozilla/firefox/2z1elovw.default-release-1776979147363"
 )
 # Used only if the prefs.js lookup below fails for some reason:
 FALLBACK_UUID = "d8295bb5-7513-4c68-89c9-3b47b82861bc"
@@ -152,7 +153,8 @@ def main():
     opts.add_argument("-new-instance")
     opts.add_argument("-no-remote")
 
-    driver = webdriver.Firefox(options=opts)
+    service = Service(service_args=["--allow-system-access"])
+    driver = webdriver.Firefox(options=opts, service=service)
     try:
         navigate_to_options(driver, f"moz-extension://{uuid}/ui/options/index.html")
         import_darkreader_settings(driver)
