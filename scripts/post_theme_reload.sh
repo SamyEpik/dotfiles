@@ -87,6 +87,12 @@ reloads_light() {
       handle_error "GTK" "install override" "$out"
     fi
   fi
+
+  if [[ -d ~/.config/spotifast/themes/ ]]; then
+    atomic_copy ~/.cache/wal/pywal-spotifast.json ~/.config/spotifast/themes/Pywal.json
+  else
+    handle_error "Spotifast" "copy theme file. Is it installed?"
+  fi
 }
 
 reloads_require_restart() {
@@ -145,9 +151,9 @@ atomic_copy() { cp "$1" "$2.tmp" && mv -f "$2.tmp" "$2" || {
 
 reload_darkreader() {
   if pgrep -x firefox >/dev/null; then
-    notify-send "Theme Reloader" "Firefox is running. Please quit Firefox to reload DarkReader" -u normal
+    notify-send "Theme Reloader" "Firefox is running. Please quit Firefox to reload DarkReader" -u critical
     mode_array=("  <span weight=\"normal\">Try Reload</span>" "  <span weight=\"normal\">Skip DarkReader</span>")
-    mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 145 --width 430 --sort-order default --prompt "Firefox is running!" --normal-window)
+    mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 170 --width 430 --sort-order default --hide-search)
     mode_index=-1
     for i in "${!mode_array[@]}"; do
       if [[ "${mode_array[$i]}" == "$mode" ]]; then
@@ -168,9 +174,12 @@ reload_darkreader() {
       ;;
     esac
   else
-    notify-send "Theme Reloader" "Firefox quickly opening and closing is intended behaviour.\nThis is unfortunately the only way to reload DarkReader." -u normal
     pkill -f firefox
-    $HOME/.dotfiles/scripts/darkreader_reload.py
+    if ! out=$($HOME/.dotfiles/scripts/darkreader_reload.py 2>&1); then
+      handle_error "DarkReader" "set the theme in firefox" "$out"
+    else
+      notify-send "Theme Reloader" "DarkReader's theme was successfully updated, you can reopen Firefox!" -u normal
+    fi
   fi
 }
 
@@ -248,7 +257,7 @@ reload_obsidian() {
 mode_index=-1
 if ! ((FORCE_LIGHT)); then
   mode_array=("  <span weight=\"normal\">Reload All</span>" "  <span weight=\"normal\">Skip Restarts</span>" "  <span weight=\"normal\">Only Wallpaper</span>")
-  mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 210 --width 340 --sort-order default --hide-search)
+  mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 230 --width 340 --sort-order default --hide-search)
   for i in "${!mode_array[@]}"; do
     if [[ "${mode_array[$i]}" == "$mode" ]]; then
       mode_index=$i

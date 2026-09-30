@@ -152,6 +152,7 @@ def main():
     opts.add_argument(PROFILE)
     opts.add_argument("-new-instance")
     opts.add_argument("-no-remote")
+    opts.add_argument("-headless")
 
     service = Service(service_args=["--allow-system-access"])
     driver = webdriver.Firefox(options=opts, service=service)
