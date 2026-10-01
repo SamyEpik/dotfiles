@@ -1,3 +1,4 @@
+--[[
 return {
   {
     "uZer/pywal16.nvim",
@@ -8,3 +9,4 @@ return {
     end,
   },
 }
+]]

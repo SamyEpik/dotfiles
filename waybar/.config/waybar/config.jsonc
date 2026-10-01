@@ -6,17 +6,13 @@
   "passthrough": false,
   "gtk-layer-shell": true,
   "height": 64,
-  "modules-left": [
-    "custom/arch",
-    "clock",
-    "hyprland/workspaces"
-  ],
+  "modules-left": ["custom/arch", "clock", "hyprland/workspaces"],
   "modules-center": [
     "hyprland/window",
     "custom/prev",
     "image#album-art",
     "custom/mediaplayer",
-    "custom/next"
+    "custom/next",
   ],
   "modules-right": [
     "network",
@@ -26,22 +22,22 @@
     "battery",
     "pulseaudio",
     "pulseaudio#microphone",
-    "tray"
+    "tray",
   ],
   "hyprland/window": {
     "format": "{}",
     "tooltip-format": "{class}",
-    "separate-outputs": true
+    "separate-outputs": true,
   },
   "hyprland/workspaces": {
     "all-outputs": false,
     "disable-scroll": true,
-    "on-click": "activate"
+    "on-click": "activate",
   },
   "tray": {
     "icon-size": 18,
     "spacing": 10,
-    "show-passive-items": true
+    "show-passive-items": true,
   },
   "clock": {
     "format": "<b> {:%R  %a,%e. %b}</b>",
@@ -55,15 +51,15 @@
         "days": "<span color='#ecc6d9'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-      }
-    }
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
   },
   "battery": {
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 20
+      "critical": 20,
     },
     "format": "{icon} {capacity}%",
     "format-charging": " {capacity}%",
@@ -71,27 +67,15 @@
     "format-alt": " {icon} {time}",
     "tooltip-format": "Toggle between capacity/time: 󰍽\n\nRemaining: {capacity}%\tEmpty in: {time}\n\nHealth: {health}%\tCycles: {cycles}",
     "tooltip-format-charging": "{timeTo}, Drawing {power} Watts",
-    "format-icons": [
-      "󰂎",
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
-    ]
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": " Muted",
-    "on-click": "pamixer -t",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "hyprctl dispatch exec 'kitty --class floating wiremix'",
-    "on-scroll-up": "pamixer -i 3",
-    "on-scroll-down": "pamixer -d 3",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
+    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+",
     "scroll-step": 5,
     "format-icons": {
       "headphone": "",
@@ -100,34 +84,30 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        " ",
-        " "
-      ]
+      "default": ["", " ", " "],
     },
-    "tooltip-format": "Toggle Mute: 󰍽\nOpen Wiremix Playback: 󰍽\n\nVolume: {volume}%\n\n{desc}"
+    "tooltip-format": "Toggle Mute: 󰍽\nOpen Wiremix Playback: 󰍽\n\nVolume: {volume}%\n\n{desc}",
   },
   "pulseaudio#microphone": {
     "format": "{format_source}",
     "format-source": " {volume}%",
     "format-source-muted": "  Muted",
-    "on-click": "pamixer --default-source -t",
+    "on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
     "on-click-right": "hyprctl dispatch exec 'kitty --class floating wiremix --tab recording'",
-    "on-scroll-up": "pamixer --default-source -i 5",
-    "on-scroll-down": "pamixer --default-source -d 5",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%-",
+    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 1%+",
     "scroll-step": 5,
-    "tooltip-format": "Toggle Mute: 󰍽\nOpen Wiremix Recording: 󰍽\n\nVolume: {format_source}\n\n{desc}"
+    "tooltip-format": "Toggle Mute: 󰍽\nOpen Wiremix Recording: 󰍽\n\nVolume: {format_source}\n\n{desc}",
   },
   "temperature": {
     "thermal-zone": 2,
     // /sys/class/hwmon/hwmon4/temp2_input is the average CPU-Core Temp
-    "hwmon-path": "/sys/class/hwmon/hwmon4/temp2_input",
+    "hwmon-path": "/sys/class/hwmon/pactl set-source-volume @DEFAULT_SOURCE@ +5%hwmon4/temp2_input",
     "interval": "1",
     "critical-threshold": 80,
     "format": " {temperatureC}°C",
     "tooltip-format": "Open CPU Usage: 󰍽\n\nAverage Core Temperature: {temperatureC}°C",
-    "on-click": "hyprctl dispatch exec 'kitty --class floating btop -p 1'"
+    "on-click": "hyprctl dispatch exec 'kitty --class floating btop -p 1'",
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -139,7 +119,7 @@
     "tooltip-format": "Open NetworkManager TUI 󰍽\nOpen Network Usage 󰍽\n\n{essid}\t{ipaddr}/{cidr}\n\n{ifname}\t {bandwidthUpBytes}  {bandwidthDownBytes}",
     "tooltip-format-wifi": "Open NetworkManager TUI: 󰍽\nOpen Network Usage: 󰍽\n\n{essid}\t{ipaddr}/{cidr}\n\n{ifname} ({signalStrength}%)\t {bandwidthUpBytes}  {bandwidthDownBytes}",
     "on-click": "hyprctl dispatch exec 'kitty --class floating nmtui'",
-    "on-click-right": "hyprctl dispatch exec 'kitty --class floating btop -p 4'"
+    "on-click-right": "hyprctl dispatch exec 'kitty --class floating btop -p 4'",
   },
   "bluetooth": {
     "format": " {status}",
@@ -150,14 +130,14 @@
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "hyprctl dispatch exec 'kitty --class floating bluetuith'"
+    "on-click": "hyprctl dispatch exec 'kitty --class floating bluetuith'",
   },
   "memory": {
     "interval": 5,
     "format": " {}%",
     "on-click": "hyprctl dispatch exec 'kitty --class floating btop -p 3'",
     "max-length": 10,
-    "tooltip-format": "Open Memory Usage: 󰍽\n\nMemory: {used:0.1f}G/{total:0.1f}G\n\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
+    "tooltip-format": "Open Memory Usage: 󰍽\n\nMemory: {used:0.1f}G/{total:0.1f}G\n\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G",
   },
   // not used + doesnt work
   "cava": {
@@ -177,31 +157,22 @@
     "waves": false,
     "noise_reduction": 0.77,
     "input_delay": 2,
-    "format-icons": [
-      "▁",
-      "▂",
-      "▃",
-      "▄",
-      "▅",
-      "▆",
-      "▇",
-      "█"
-    ],
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     "actions": {
-      "on-click-right": "mode"
-    }
+      "on-click-right": "mode",
+    },
   },
   "custom/arch": {
     "format": "",
     "tooltip-format": "Open System Menu: 󰍽",
-    "on-click": "~/.config/scripts/system_menu.sh --menu"
+    "on-click": "~/.config/scripts/system_menu.sh --menu",
   },
   "image#album-art": {
     "path": "/tmp/waybar-mediaplayer-art",
     "on-click": "hyprctl dispatch workspace 9",
     "size": 40,
     "interval": 5,
-    "signal": 4
+    "signal": 4,
   },
   "custom/mediaplayer": {
     "exec": "tail -f /tmp/waybar-mediaplayer-output",
@@ -212,17 +183,17 @@
     "on-scroll-down": "$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer previous",
     "smooth-scrolling-threshold": 20,
     "min-length": 20,
-    "max-length": 20
+    "max-length": 20,
   },
   "custom/prev": {
     "format": "󰒮",
     "tooltip-format": "Previous",
-    "on-click": "exec playerctl -p spotify previous"
+    "on-click": "exec playerctl -p spotify previous",
   },
   "custom/next": {
     "format": "󰒭",
     "tooltip-format": "Next",
-    "on-click": "exec playerctl -p spotify next"
+    "on-click": "exec playerctl -p spotify next",
   },
   // not used
   "custom/spotify": {
@@ -237,6 +208,6 @@
     "on-scroll-up": "playerctl -p spotify next",
     "on-scroll-down": "playerctl -p spotify previous",
     "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
-    "exec-if": "pgrep spotify"
-  }
+    "exec-if": "pgrep spotify",
+  },
 }

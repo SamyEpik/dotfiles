@@ -1,0 +1,19 @@
+{
+  "base": "dark",
+  "colors": {
+    "window": "{color0}",
+    "panel": "{color0.lighten(4%)}",
+    "surface": "{color0.lighten(6%)}",
+    "surface_hover": "{color0.lighten(9%)}",
+    "surface_active": "{color0.lighten(13%)}",
+    "outline": "{color0.lighten(15%)}",
+    "text": "{foreground}",
+    "secondary": "{color3}",
+    "dim": "{color8}",
+    "accent": "{color2}",
+    "accent_hover": "{color2.lighten(10%)}",
+    "on_accent": "{color0}",
+    "danger": "{color1}",
+    "warning": "{color11}"
+  }
+}
