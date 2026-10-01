@@ -96,42 +96,10 @@ reloads_light() {
 }
 
 reloads_require_restart() {
-  # --- Spotify ---
-  if pgrep -x spotify >/dev/null; then
-    echo "Spotify is running. Restarting to apply theme..."
-    pkill spotify || true
-
-    if ! out=$(spicetify apply); then
-      handle_error "Spicetify" "apply" "Please manually apply spicetify. Try spicetify backup apply! \n$out"
-    fi
-    if ! out=$(spicetify restart); then
-      handle_error "Spicetify" "restart" "$out"
-    fi
-  fi
-
-  # --- Vesktop ---
-  if pgrep -f vesktop >/dev/null; then
-    echo "Vesktop is running. Reloading..."
-    vesktop_addr="$(
-      hyprctl -j clients |
-        jq -r '.[] | select((.class|test("(?i)vesktop|discord")) or (.title|test("(?i)vesktop|discord"))) | .address' |
-        head -n1 || true
-    )"
-    if [[ -n "${vesktop_addr:-}" ]]; then
-      echo "vesktop_addr: $vesktop_addr"
-      if ! out=$(hyprctl dispatch sendshortcut "CTRL, R, address:$vesktop_addr"); then
-        handle_error "Vesktop" "reload" "$out"
-      fi
-    else
-      handle_error "Vesktop" "reload" "Couldn't find vesktop/discord window"
-    fi
-  fi
-  sleep 1
-
   # --- Obsidian ---
   reload_obsidian
 
-  ## --- DarkReader ---
+  # --- DarkReader ---
   reload_darkreader
 }
 
