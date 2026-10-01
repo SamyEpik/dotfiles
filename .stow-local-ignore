@@ -1,0 +1,11 @@
+# ~/dotfiles/zsh/.stow-local-ignore
+README.*
+\.git
+LICENSE
+.*\.bak
+^/wallpapers$
+^/scripts$
+^/LICENSES$
+INSTALL.*
+^/BetterDiscord$
+^/greetd-regreet$
