@@ -171,43 +171,27 @@
     "path": "/tmp/waybar-mediaplayer-art",
     "on-click": "hyprctl dispatch workspace 9",
     "size": 40,
-    "interval": 5,
+    "interval": 5, // requiered or waybar will hang
     "signal": 4,
   },
   "custom/mediaplayer": {
-    "exec": "tail -f /tmp/waybar-mediaplayer-output",
+    "exec": "$HOME/.dotfiles/scripts/mediaplayer.sh",
     "return-type": "json",
     "format": "{}",
-    "on-click": "exec playerctl -p spotify play-pause",
-    "on-scroll-up": "$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer next",
-    "on-scroll-down": "$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer previous",
+    "restart-interval": 5,
+    "escape": true,
     "smooth-scrolling-threshold": 20,
-    "min-length": 20,
     "max-length": 20,
+    "on-click": "playerctl -p spotifast play-pause",
   },
   "custom/prev": {
     "format": "󰒮",
     "tooltip-format": "Previous",
-    "on-click": "exec playerctl -p spotify previous",
+    "on-click": "playerctl -p spotifast previous",
   },
   "custom/next": {
     "format": "󰒭",
     "tooltip-format": "Next",
-    "on-click": "exec playerctl -p spotify next",
-  },
-  // not used
-  "custom/spotify": {
-    "format": "{icon} {}",
-    "escape": true,
-    "return-type": "json",
-    "max-length": 40,
-    "interval": 30, // Remove this if your script is endless and write in loop
-    "on-click": "playerctl -p spotify play-pause",
-    "on-click-right": "killall spotify",
-    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
-    "on-scroll-up": "playerctl -p spotify next",
-    "on-scroll-down": "playerctl -p spotify previous",
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
-    "exec-if": "pgrep spotify",
+    "on-click": "playerctl -p spotifast next",
   },
 }

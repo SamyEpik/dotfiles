@@ -194,7 +194,7 @@ window#waybar.empty #window {
 }
 
 #image:hover {
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 #custom-mediaplayer {
@@ -217,4 +217,4 @@ window#waybar.empty #window {
   padding-right: 13px;
   padding-left: 13px;
 }
-@import "./waybar-mediaplayer/src/style.css";
+@import "./mediaplayer.css";
