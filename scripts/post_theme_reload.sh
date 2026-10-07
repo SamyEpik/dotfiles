@@ -87,12 +87,6 @@ reloads_light() {
       handle_error "GTK" "install override" "$out"
     fi
   fi
-
-  if [[ -d ~/.config/spotifast/themes/ ]]; then
-    atomic_copy ~/.cache/wal/pywal-spotifast.json ~/.config/spotifast/themes/Pywal.json
-  else
-    handle_error "Spotifast" "copy theme file. Is it installed?"
-  fi
 }
 
 reloads_require_restart() {

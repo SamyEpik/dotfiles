@@ -62,8 +62,8 @@ Setup [greetd-regreet](https://github.com/rharish101/ReGreet?tab=readme-ov-file#
 
 Useful tools and other dotfiles I used:
 
-- Based on: <https://github.com/MartinFillon/dotfiles> (hypr config), <https://github.com/soldoestech/hyprland> (hypr config), <https://github.com/BinaryHarbinger/hyprdots> (system menu)
+- Based on: <https://github.com/MartinFillon/dotfiles> (hypr config), <https://github.com/soldoestech/hyprland> (hypr config), <https://github.com/BinaryHarbinger/hyprdots> (system menu), <https://github.com/raffaem/waybar-mediaplayer> (mediaplayer)
 
-- Fun features: <https://github.com/5hubham5ingh/kitty-panel>, <https://github.com/raffaem/waybar-mediaplayer>
+- Fun features: <https://github.com/5hubham5ingh/kitty-panel>
 
 - Pywal: <https://github.com/SeniorMatt/Mattthew-s-Dotfiles>, <https://github.com/eylles/pywal16-libadwaita>, <https://github.com/eylles/pywal-extra>
