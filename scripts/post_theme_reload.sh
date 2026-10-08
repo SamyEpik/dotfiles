@@ -87,6 +87,12 @@ reloads_light() {
       handle_error "GTK" "install override" "$out"
     fi
   fi
+
+  if [[ -f ~/.config/spotifast/themes/Pywal.json ]]; then
+    spotifast --reload-themes
+  else
+    handle_error "Spotifast" "copy theme file. Is it installed and linked?"
+  fi
 }
 
 reloads_require_restart() {
