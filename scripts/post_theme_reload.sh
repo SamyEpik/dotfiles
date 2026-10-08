@@ -120,7 +120,7 @@ atomic_copy() { cp "$1" "$2.tmp" && mv -f "$2.tmp" "$2" || {
 reload_darkreader() {
   if pgrep -x firefox >/dev/null; then
     notify-send "Theme Reloader" "Firefox is running. Please quit Firefox to reload DarkReader" -u critical
-    mode_array=("  <span weight=\"normal\">Try Reload</span>" "  <span weight=\"normal\">Skip DarkReader</span>")
+    mode_array=("  <span weight=\"normal\">Kill Firefox and Try Reload</span>" "  <span weight=\"normal\">Skip DarkReader</span>")
     mode=$(printf "%s\n" "${mode_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_confirm --height 170 --width 430 --sort-order default --hide-search)
     mode_index=-1
     for i in "${!mode_array[@]}"; do
@@ -132,6 +132,7 @@ reload_darkreader() {
 
     case $mode_index in
     0)
+      pkill -f firefox
       reload_darkreader
       ;;
     1)
@@ -142,7 +143,6 @@ reload_darkreader() {
       ;;
     esac
   else
-    pkill -f firefox
     if ! out=$($HOME/.dotfiles/scripts/darkreader_reload.py 2>&1); then
       handle_error "DarkReader" "set the theme in firefox" "$out"
     else
