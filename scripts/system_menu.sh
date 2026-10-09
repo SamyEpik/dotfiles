@@ -137,9 +137,9 @@ help_options() {
 }
 
 rice_settings() {
-  options_array=("" "" "" "" "")
+  options_array=("" "" "" "" "" "󱡓")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 335 --sort-order default)
+  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 400 --sort-order default)
 
   index=-1
   for i in "${!options_array[@]}"; do
@@ -163,7 +163,10 @@ rice_settings() {
     theme_options
     ;;
   4)
-    appearence_options
+    scaling_settings
+    ;;
+  5)
+    opacity_settings
     ;;
   *)
     echo "No option selected"
@@ -227,35 +230,6 @@ theme_options() {
   else
     echo "No theme selected."
   fi
-}
-
-appearence_options() {
-  options_array=("" "  <span weight=\"normal\">Scale</span>" "󱡓  <span weight=\"normal\">Opacity</span>")
-
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_sidebar --height 310 --width 330 --sort-order default)
-
-  index=-1
-  for i in "${!options_array[@]}"; do
-    if [[ "${options_array[$i]}" == "$chosen" ]]; then
-      index=$i
-      break
-    fi
-  done
-
-  case $index in
-  0)
-    menu
-    ;;
-  1)
-    scaling_settings
-    ;;
-  2)
-    opacity_settings
-    ;;
-  *)
-    echo "No option selected"
-    ;;
-  esac
 }
 
 scaling_settings() {
