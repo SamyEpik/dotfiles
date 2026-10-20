@@ -71,7 +71,7 @@
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-muted": " Muted",
+    "format-muted": "󰝟 Muted",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "hyprctl dispatch exec 'kitty --class floating wiremix'",
     "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",

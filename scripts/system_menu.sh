@@ -84,7 +84,7 @@ logout_options() {
     menu
     ;;
   1)
-    swaylock
+    hyprlock
     ;;
   2)
     systemctl poweroff
@@ -128,7 +128,7 @@ help_options() {
     echo "Not implemented yet!"
     ;;
   3)
-    firefox https://github.com/samyepik/.dotfiles
+    firefox https://github.com/samyepik/dotfiles
     ;;
   *)
     echo "No option selected"
