@@ -30,6 +30,12 @@ function HyprBinds.run(id)
     return hl.dispatch(b.action)
 end
 
+-- Add an entry to the registry without binding anything (used by gestures.lua).
+-- entry: { keys, action, category, description, repeating, runnable }
+function HyprBinds.register(entry)
+    table.insert(HyprBinds.list, entry)
+end
+
 -- bind(keys, action, category, description, opts)
 -- opts are passed to hl.bind, plus `runnable = false` to hide the "run" option (mouse binds)
 local function bind(keys, action, category, description, opts)
@@ -40,7 +46,7 @@ local function bind(keys, action, category, description, opts)
 
     hl.bind(keys, action, opts)
 
-    table.insert(HyprBinds.list, {
+    HyprBinds.register({
         keys        = keys,
         action      = action,
         category    = category,
@@ -54,26 +60,7 @@ local function exec(cmd)
     return hl.dsp.exec_cmd(cmd)
 end
 
--- Float the active window, resize it to half of its monitor and center it
-local function float_and_center()
-    local w = hl.get_active_window()
-    if w == nil then
-        return
-    end
-
-    hl.dispatch(hl.dsp.window.float({ action = "set" }))
-
-    local m = w.monitor or hl.get_active_monitor()
-    if m ~= nil then
-        hl.dispatch(hl.dsp.window.resize({
-            x = math.floor(m.width / m.scale / 2),
-            y = math.floor(m.height / m.scale / 2),
-        }))
-    end
-
-    -- center after resizing, otherwise the window ends up off-center
-    hl.dispatch(hl.dsp.window.center())
-end
+local float_and_center = require("categories.util").float_and_center
 
 -- Binds for programs
 bind(mainMod .. " + E", exec("thunar"), "Programs", "File Manager")
