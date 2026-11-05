@@ -203,11 +203,11 @@ reload_obsidian() {
       )"
 
       if [[ -n "${obsidian_addr:-}" ]]; then
-        if ! hyprctl dispatch sendshortcut "CTRL, S, address:$obsidian_addr"; then
+        if [[ "$(hyprctl dispatch "hl.dsp.send_shortcut({ mods = \"CTRL\", key = \"S\", window = \"address:$obsidian_addr\" })")" != "ok" ]]; then
           handle_error "Vesktop" "save" "Failed to send Ctrl+S"
         fi
         sleep 0.3
-        if ! out=$(hyprctl dispatch sendshortcut "CTRL SHIFT, R, address:$obsidian_addr" 2>&1); then
+        if ! out=$(hyprctl dispatch "hl.dsp.send_shortcut({ mods = \"CTRL SHIFT\", key = \"R\", window = \"address:$obsidian_addr\" })" 2>&1) || [[ "$out" != "ok" ]]; then
           handle_error "Vesktop" "reload" "$out"
         fi
       else

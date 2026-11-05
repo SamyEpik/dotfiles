@@ -46,10 +46,12 @@ escape_regex() {
 }
 escaped_class="$(printf '%s' "$class" | escape_regex)"
 
-# --- Apply the rule (runtime only) ---
-cmd=(hyprctl keyword windowrule "match:class ^(${escaped_class})$, opacity ${opacity}, ")
-if ! "${cmd[@]}"; then
-  echo "Failed to apply opacity rule." >&2
+# --- Apply the rule (runtime only, gone after a config reload) ---
+# Lua long brackets [==[...]==] keep the regex backslashes literal
+rule="hl.window_rule({ match = { class = [==[^(${escaped_class})\$]==] }, opacity = \"${opacity}\" })"
+out="$(hyprctl eval "$rule" 2>&1)"
+if [[ "$out" != "ok" ]]; then
+  echo "Failed to apply opacity rule: $out" >&2
   exit 1
 fi
 
@@ -57,4 +59,4 @@ fi
 notify-send "Hyprland Opacity" "Applied opacity ${opacity} to class: ${class}" 2>/dev/null || true
 
 # Echo what we did (for logs / debugging)
-echo "windowrulev2 = opacity ${opacity}, class:^(${class})$"
+echo "$rule"

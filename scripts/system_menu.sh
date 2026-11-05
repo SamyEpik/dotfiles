@@ -40,14 +40,14 @@ show_menu() {
 
   rm -f "$PICK_FILE"
   echo "${#items[@]}" >"$COUNT_FILE"
-  trap 'hyprctl dispatch submap reset >/dev/null; rm -f "$COUNT_FILE"' EXIT
-  hyprctl dispatch submap system_menu >/dev/null
+  trap 'hyprctl dispatch '\''hl.dsp.submap("reset")'\'' >/dev/null; rm -f "$COUNT_FILE"' EXIT
+  hyprctl dispatch 'hl.dsp.submap("system_menu")' >/dev/null
 
   # print_line_num makes wofi output the index and disables its cache,
   # which would otherwise reorder entries by usage
   out=$(printf "%s\n" "${items[@]}" | wofi -D dmenu-print_line_num=true "$@")
 
-  hyprctl dispatch submap reset >/dev/null
+  hyprctl dispatch 'hl.dsp.submap("reset")' >/dev/null
   rm -f "$COUNT_FILE"
   trap - EXIT
 
@@ -124,7 +124,7 @@ logout_options() {
     systemctl reboot
     ;;
   5)
-    hyprctl dispatch exit
+    hyprctl dispatch 'hl.dsp.exit()'
     ;;
   *)
     echo "No option selected"

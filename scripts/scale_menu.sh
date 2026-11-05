@@ -129,8 +129,15 @@ res="${width}x${height}"
 pos="${x}x${y}"
 
 # apply with the snapped/clean scale (Hyprland will accept this)
-hyprctl keyword monitor "$mon,${res},${pos},${apply_scale}"
+# runtime only: the rule from categories/monitors.lua is restored on config reload
+rule="hl.monitor({ output = \"${mon}\", mode = \"${res}\", position = \"${pos}\", scale = \"${apply_scale}\" })"
+out="$(hyprctl eval "$rule" 2>&1)"
+if [[ "$out" != "ok" ]]; then
+  notify-send "Hyprland Scale" "Failed to apply scale ${apply_scale} to ${mon}: ${out}" 2>/dev/null || true
+  echo "Failed to apply scale: $out" >&2
+  exit 1
+fi
 
 notify-send "Hyprland Scale" "Applied scale ${apply_scale} to monitor: ${mon}" 2>/dev/null || true
 
-echo "$mon,${res},${pos},${apply_scale}"
+echo "$rule"

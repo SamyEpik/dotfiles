@@ -1,4 +1,4 @@
 #!/bin/bash
 
 pkill waybar
-hyprctl dispatcher exec waybar
+hyprctl dispatch 'hl.dsp.exec_cmd("waybar")'
