@@ -25,18 +25,54 @@ run_launcher() {
     --conf ~/.config/wofi/config
 }
 
+# Number-key selection
+# While a menu is open, the Hyprland submap "system_menu" binds 1-9 to
+# `system_menu.sh --pick N`, which stores N and closes wofi.
+COUNT_FILE="${XDG_RUNTIME_DIR:-/tmp}/system_menu.count"
+PICK_FILE="${XDG_RUNTIME_DIR:-/tmp}/system_menu.pick"
+
+# show_menu <array name> [extra wofi args...]
+# Prints the 0-based index of the chosen entry, or nothing if cancelled.
+show_menu() {
+  local -n items=$1
+  shift
+  local out
+
+  rm -f "$PICK_FILE"
+  echo "${#items[@]}" >"$COUNT_FILE"
+  trap 'hyprctl dispatch submap reset >/dev/null; rm -f "$COUNT_FILE"' EXIT
+  hyprctl dispatch submap system_menu >/dev/null
+
+  # print_line_num makes wofi output the index and disables its cache,
+  # which would otherwise reorder entries by usage
+  out=$(printf "%s\n" "${items[@]}" | wofi -D dmenu-print_line_num=true "$@")
+
+  hyprctl dispatch submap reset >/dev/null
+  rm -f "$COUNT_FILE"
+  trap - EXIT
+
+  if [[ -s "$PICK_FILE" ]]; then
+    echo $(($(<"$PICK_FILE") - 1))
+    rm -f "$PICK_FILE"
+  else
+    echo "$out"
+  fi
+}
+
+# Called from the Hyprland submap: select entry N of the open menu
+pick() {
+  local n=$1 count
+  [[ $n =~ ^[1-9]$ && -r $COUNT_FILE ]] || exit 0
+  count=$(<"$COUNT_FILE")
+  ((n <= count)) || exit 0
+  echo "$n" >"$PICK_FILE"
+  pkill -x wofi
+}
+
 menu() {
   options_array=("" "" "" "" "" "󰠗" "󰙵")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar)
-
-  index=-1
-  for i in "${!options_array[@]}"; do
-    if [[ "${options_array[$i]}" == "$chosen" ]]; then
-      index=$i
-      break
-    fi
-  done
+  index=$(show_menu options_array --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --sort-order default)
 
   case $index in
   0)
@@ -69,15 +105,7 @@ menu() {
 logout_options() {
   options_array=("" "󰷛" "" "󰤄" "" "󰍃")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 390 --sort-order default)
-
-  index=-1
-  for i in "${!options_array[@]}"; do
-    if [[ "${options_array[$i]}" == "$chosen" ]]; then
-      index=$i
-      break
-    fi
-  done
+  index=$(show_menu options_array --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 390 --sort-order default)
 
   case $index in
   0)
@@ -107,15 +135,7 @@ logout_options() {
 help_options() {
   options_array=("" "󰌌" "󰞋" "")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 275 --sort-order default)
-
-  index=-1
-  for i in "${!options_array[@]}"; do
-    if [[ "${options_array[$i]}" == "$chosen" ]]; then
-      index=$i
-      break
-    fi
-  done
+  index=$(show_menu options_array --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 275 --sort-order default)
 
   case $index in
   0)
@@ -139,15 +159,7 @@ help_options() {
 rice_settings() {
   options_array=("" "" "" "" "" "󱡓")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 400 --sort-order default)
-
-  index=-1
-  for i in "${!options_array[@]}"; do
-    if [[ "${options_array[$i]}" == "$chosen" ]]; then
-      index=$i
-      break
-    fi
-  done
+  index=$(show_menu options_array --style ~/.config/wofi/style_sidemenu.css --conf ~/.config/wofi/config_sidebar --height 400 --sort-order default)
 
   case $index in
   0)
@@ -177,15 +189,7 @@ rice_settings() {
 reload_options() {
   options_array=("" "  <span weight=\"normal\">Waybar</span>" "  <span weight=\"normal\">Pywal</span>" "  <span weight=\"normal\">WiFi firmware</span>" "  <span weight=\"normal\">Hyprland</span>")
 
-  chosen=$(printf "%s\n" "${options_array[@]}" | wofi --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_sidebar --height 345 --width 330 --sort-order default)
-
-  index=-1
-  for i in "${!options_array[@]}"; do
-    if [[ "${options_array[$i]}" == "$chosen" ]]; then
-      index=$i
-      break
-    fi
-  done
+  index=$(show_menu options_array --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_sidebar --height 345 --width 330 --sort-order default)
 
   case $index in
   0)
@@ -241,7 +245,10 @@ opacity_settings() {
 }
 
 # Check for flags and validate input
-if [[ $# -ne 1 ]]; then
+if [[ $1 == --pick && $# -eq 2 ]]; then
+  pick "$2"
+  exit 0
+elif [[ $# -ne 1 ]]; then
   usage
 fi
 

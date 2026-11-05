@@ -242,7 +242,7 @@ include "hyde-keybinds";
   def get_keycode: (keycode_mapping[(. | tostring)] // .);
 
   
-.[] |
+.[] | select((.submap // "") == "") |
   .dispatcher as $dispatcher | .desc_dispatcher = $dispatcher |
   .dispatcher as $dispatcher | .category = $dispatcher |
   .arg as $arg | .desc_executable = $arg |
