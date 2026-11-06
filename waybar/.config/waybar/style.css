@@ -68,6 +68,7 @@ tooltip {
 #network,
 #bluetooth,
 #temperature,
+#custom-cputemp,
 #workspaces,
 #tray,
 #cava,
@@ -87,12 +88,14 @@ tooltip {
   border: 2px solid @color0;
 }
 
-#temperature {
+#temperature,
+#custom-cputemp {
   border-radius: 10px 0px 0px 10px;
   color: @color5;
 }
 
-#temperature.critical {
+#temperature.critical,
+#custom-cputemp.critical {
   color: @color1;
 }
 

@@ -17,7 +17,7 @@
   "modules-right": [
     "network",
     "bluetooth",
-    "temperature",
+    "custom/cputemp",
     "memory",
     "battery",
     "pulseaudio",
@@ -99,16 +99,11 @@
     "scroll-step": 5,
     "tooltip-format": "Toggle Mute: 󰍽\nOpen Wiremix Recording: 󰍽\n\nVolume: {format_source}\n\n{desc}",
   },
-  "temperature": {
-    "thermal-zone": 2,
-    // CPU package temp (coretemp "Package id 0"). hwmonN numbers change between boots,
-    // so point at the stable coretemp device path instead of /sys/class/hwmon/hwmonN.
-    "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
-    "input-filename": "temp1_input",
-    "interval": "1",
-    "critical-threshold": 80,
-    "format": " {temperatureC}°C",
-    "tooltip-format": "Open CPU Usage: 󰍽\n\nAverage Core Temperature: {temperatureC}°C",
+  // CPU package temp + CPU usage in tooltip (built-in temperature module can't show usage)
+  "custom/cputemp": {
+    "exec": "$HOME/.dotfiles/scripts/cpu_temp.sh",
+    "return-type": "json",
+    "restart-interval": 5,
     "on-click": "hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty --class floating btop -p 1\")'",
   },
   "network": {
@@ -138,7 +133,6 @@
     "interval": 5,
     "format": " {}%",
     "on-click": "hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty --class floating btop -p 3\")'",
-    "max-length": 10,
     "tooltip-format": "Open Memory Usage: 󰍽\n\nMemory: {used:0.1f}G/{total:0.1f}G\n\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G",
   },
   // not used + doesnt work
