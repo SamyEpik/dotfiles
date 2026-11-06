@@ -12,6 +12,11 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("FORCE_LIGHT=\"--force-light\" waypaper --restore")
     hl.exec_cmd("hyprosd daemon")
 
+    -- load hyprpm plugins (hyprgrass, see touch.lua), then reload the config so
+    -- the `if hl.plugin.hyprgrass` blocks run with the plugin present.
+    -- -n: notify if a plugin needs `hyprpm update` after a Hyprland update
+    hl.exec_cmd("hyprpm reload -n && hyprctl reload")
+
     -- for screensharing
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
 
