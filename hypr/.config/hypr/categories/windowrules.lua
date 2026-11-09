@@ -54,6 +54,15 @@ hl.window_rule({
     center = true,
 })
 
+-- Bitwarden desktop ignores --class (both Wayland and XWayland), so match its native class
+hl.window_rule({
+    name   = "float-bitwarden-desktop",
+    match  = { class = "^(Bitwarden)$" },
+    float  = true,
+    size   = FLOAT_SIZE,
+    center = true,
+})
+
 hl.window_rule({
     name   = "float-class-share-picker",
     match  = { class = "hyprland-share-picker" },
