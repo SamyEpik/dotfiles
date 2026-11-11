@@ -89,9 +89,14 @@ reloads_light() {
   fi
 
   if [[ -f ~/.config/spotifast/themes/Pywal.json ]]; then
-    spotifast --reload-themes
+    spotifast reload-themes >/dev/null 2>&1 || true
   else
     handle_error "Spotifast" "copy theme file. Is it installed and linked?"
+  fi
+
+  # --- Spotifast Winamp skin ---
+  if ! out=$(python3 -I "$HOME/.dotfiles/scripts/spotifast_pywal_skin.py" 2>&1); then
+    handle_error "Spotifast" "generate pywal Winamp skin" "$out"
   fi
 }
 
