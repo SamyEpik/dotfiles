@@ -103,8 +103,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias discord='discord --enable-features=UseOzonePlatform --ozone-platform=wayland'
-alias rwd='bash /home/samuel/.config/hypr/scripts/reload_waybar_debug.sh'
-alias rw='bash /home/samuel/.config/hypr/scripts/reload_waybar.sh'
+alias rwd='bash /home/samuel/.config/hypr/scripts/reload_bar_debug.sh'
+alias rw='bash /home/samuel/.config/hypr/scripts/reload_bar.sh'
 alias icat='kitty +kitten icat'
 alias neo='neo -D --colormode=16 -a'
 alias cbonsai='cbonsai -li'
@@ -113,9 +113,6 @@ alias neofetch='fastfetch'
 alias mt='tt -t 15 -notheme -words 200en'
 alias please='sudo $(fc -ln -1)'
 alias hc='fc -l -n 1 | fzf --tac --no-sort | tr -d "\n" | wl-copy'
-
-# launch on zsh start
-pfetch
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall

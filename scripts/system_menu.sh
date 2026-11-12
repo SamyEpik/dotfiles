@@ -187,7 +187,7 @@ rice_settings() {
 }
 
 reload_options() {
-  options_array=("" "  <span weight=\"normal\">Waybar</span>" "  <span weight=\"normal\">Pywal</span>" "  <span weight=\"normal\">WiFi firmware</span>" "  <span weight=\"normal\">Hyprland</span>")
+  options_array=("" "  <span weight=\"normal\">Bar</span>" "  <span weight=\"normal\">Pywal</span>" "  <span weight=\"normal\">WiFi firmware</span>" "  <span weight=\"normal\">Hyprland</span>")
 
   index=$(show_menu options_array --style ~/.config/wofi/style_sidemenu_description.css --conf ~/.config/wofi/config_sidebar --height 345 --width 330 --sort-order default)
 
@@ -196,7 +196,7 @@ reload_options() {
     rice_settings
     ;;
   1)
-    bash ~/.dotfiles/scripts/reload_waybar.sh
+    bash ~/.dotfiles/scripts/reload_bar.sh
     ;;
   2)
     wal -R

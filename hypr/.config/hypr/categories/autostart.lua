@@ -2,8 +2,7 @@
 -- "hyprland.start" fires once per session, so this is the Lua equivalent of exec-once.
 hl.on("hyprland.start", function()
     hl.exec_cmd("dunst")
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer monitor > /tmp/waybar-mediaplayer-output")
+    hl.exec_cmd("QT_LOGGING_RULES=qt.qpa.wayland.textinput=false qs") -- Quickshell bar (was waybar)
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("/usr/lib/mate-polkit/polkit-mate-authentication-agent-1")
     hl.exec_cmd("wl-paste --type text --watch cliphist store")

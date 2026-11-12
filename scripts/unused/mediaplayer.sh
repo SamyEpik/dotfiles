@@ -41,7 +41,7 @@ render() {
 
   [ "$status" = Playing ] && icon=$PLAY || icon=$PAUSE
   jq -nc \
-    --arg text "$icon $title" \
+    --arg text "$icon $title - $artist" \
     --arg tooltip "$title"$'\n'"$artist"$'\n'"$album" \
     --arg s "${status,,}" \
     --arg p "perc$perc" \
