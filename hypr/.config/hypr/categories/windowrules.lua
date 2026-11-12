@@ -1,8 +1,8 @@
 -- opacity
 local OPACITY = "0.9"
 
--- default size for floating windows
-local FLOAT_SIZE = { 860, 645 }
+-- default size for floating windows (16:10; was 860x645 = 4:3, same height kept)
+local FLOAT_SIZE = { 1032, 645 }
 
 -- --- Window Rules for programs ---
 local opacity_classes = {
