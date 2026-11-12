@@ -6,15 +6,18 @@ Dotfiles for my Arch Linux Hyprland rice
 
 - OS: Arch Linux x86_64
 - Shell: zsh 5.9
-- DE: Hyprland
+- WM: Hyprland (Lua config)
+- Bar: Quickshell
 - Terminal: kitty
+- Login: hyprlogin (greetd)
 
 ## Key Features
 
 - Sleek and productive design
-- TUI focused look
+- Modern and focused look
 - Pywal-based dynamic theming
 - Wofi-based system menu
+- Touchscreen and touchpad gestures
 
 ## ToDo
 
@@ -22,14 +25,7 @@ Dotfiles for my Arch Linux Hyprland rice
 - add choosable default apps (browser, terminal, etc.)
 - create help page/documentation
 - might replace dunst with swaync
-- option between tty or normal theme with more apps (textfox, etc.)
-- theme spicetify and spotify non TUI
-- link obsidian pywal template
 - write an install script
-
-## Install
-
-See [INSTALL.md](INSTALL.md) for the packages, linking the configs with stow, and the setup steps.
 
 ## Getting Started
 
