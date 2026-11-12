@@ -27,33 +27,13 @@ Dotfiles for my Arch Linux Hyprland rice
 - link obsidian pywal template
 - write an install script
 
-## Packages
+## Install
 
-- install [yay](https://github.com/Jguer/yay?tab=readme-ov-file#installation) first
-
-```bash
-yay -S quickshell waybar bluetuith-bin btop betterdiscordctl kitty hyprlock spicetify hyprpaper wofi dunst catppuccin-gtk-theme-mocha cliphist firefox vesktop-bin spotify obsidian vscodium-bin thunar pamixer playerctl brightnessctl hyprshot zsh pipewire pipewire-pulse pipewire-audio libreoffice-extension-texmaths libreoffice-fresh noto-fonts noto-fonts-cjk noto-fonts-emoji kvantummanager qt5-wayland qt6-wayland swayidle batsignal adw-gtk-theme python-pywal16 waypaper yazi wiremix python-pywalfox python-selenium geckodriver fd greetd greetd-regreet
-```
-
-### Post install configuration
-
-> This will eventually be handled by the install script
-
-> Also this is not nearly all of configuration required
-
-- Pywalfox:
-
-```bash
-pywalfox install
-```
-
-- Greetd:
-
-Setup [greetd-regreet](https://github.com/rharish101/ReGreet?tab=readme-ov-file#usage) for Hyprland and follow ./greetd-regreet/SETUP.md
+See [INSTALL.md](INSTALL.md) for the packages, linking the configs with stow, and the setup steps.
 
 ## Getting Started
 
-- Clone this repo and install all packages
+- Install everything with [INSTALL.md](INSTALL.md)
 - Keep the `.dotfiles` directory as `$HOME/.dotfiles`
 - Try _SUPER + A_ to open the system menu
 - Learn about this rice in the system menus help section

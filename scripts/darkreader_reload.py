@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import configparser
 import json
 import os
 import re
@@ -12,12 +13,51 @@ from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-PROFILE = os.path.expanduser(
-    "/home/samuel/.config/mozilla/firefox/2z1elovw.default-release-1776979147363"
-)
+FIREFOX_DIRS = [
+    os.path.expanduser("~/.config/mozilla/firefox"),  # newer Firefox (XDG)
+    os.path.expanduser("~/.mozilla/firefox"),  # older Firefox
+]
+
+
+def find_default_profile():
+    """Locate the default Firefox profile via profiles.ini.
+
+    Override with the DARKREADER_FF_PROFILE env var (absolute profile path).
+    Preference order: the [Install*] Default= entry (what Firefox actually
+    launches), then the profile marked Default=1, then the first profile.
+    """
+    override = os.environ.get("DARKREADER_FF_PROFILE")
+    if override:
+        return os.path.expanduser(override)
+
+    for base in FIREFOX_DIRS:
+        ini_path = os.path.join(base, "profiles.ini")
+        if not os.path.isfile(ini_path):
+            continue
+        ini = configparser.ConfigParser()
+        ini.read(ini_path, encoding="utf-8")
+
+        for section in ini.sections():
+            if section.startswith("Install") and ini.has_option(section, "Default"):
+                return os.path.join(base, ini.get(section, "Default"))
+
+        profiles = [s for s in ini.sections() if s.startswith("Profile")]
+        profiles.sort(key=lambda s: ini.get(s, "Default", fallback="0") != "1")
+        for section in profiles:
+            path = ini.get(section, "Path", fallback=None)
+            if path:
+                relative = ini.get(section, "IsRelative", fallback="1") == "1"
+                return os.path.join(base, path) if relative else path
+
+    raise RuntimeError(
+        "No Firefox profile found. Start Firefox once, or set DARKREADER_FF_PROFILE."
+    )
+
+
+PROFILE = find_default_profile()
 # Used only if the prefs.js lookup below fails for some reason:
 FALLBACK_UUID = "d8295bb5-7513-4c68-89c9-3b47b82861bc"
-THEME_JSON_PATH = os.path.expanduser("/home/samuel/.cache/wal/darkreader.json")
+THEME_JSON_PATH = os.path.expanduser("~/.cache/wal/darkreader.json")
 
 
 def get_darkreader_uuid(profile_path):

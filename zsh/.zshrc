@@ -103,8 +103,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias discord='discord --enable-features=UseOzonePlatform --ozone-platform=wayland'
-alias rwd='bash /home/samuel/.config/hypr/scripts/reload_bar_debug.sh'
-alias rw='bash /home/samuel/.config/hypr/scripts/reload_bar.sh'
+alias rwd='bash $HOME/.dotfiles/scripts/reload_bar_debug.sh'
+alias rw='bash $HOME/.dotfiles/scripts/reload_bar.sh'
 alias icat='kitty +kitten icat'
 alias neo='neo -D --colormode=16 -a'
 alias cbonsai='cbonsai -li'
@@ -116,7 +116,7 @@ alias hc='fc -l -n 1 | fzf --tac --no-sort | tr -d "\n" | wl-copy'
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
-[[ -f /home/samuel/.dart-cli-completion/zsh-config.zsh ]] && . /home/samuel/.dart-cli-completion/zsh-config.zsh || true
+[[ -f $HOME/.dart-cli-completion/zsh-config.zsh ]] && . $HOME/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
 # Keymap

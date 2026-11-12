@@ -154,7 +154,7 @@ if ! command -v wofi >/dev/null 2>&1; then
 fi
 
 # --- Wofi UI ---
-wofi_args=(--dmenu --style "$HOME/.dotfiles/wofi/style_keybinds_list.css" --allow-markup --prompt Keybinds
+wofi_args=(--dmenu --style "$HOME/.config/wofi/style_keybinds_list.css" --allow-markup --prompt Keybinds
   -D dmenu-print_line_num=true)
 case "$kb_hint_width" in
   ''|*[!0-9]*) : ;;

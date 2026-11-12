@@ -1,5 +1,3 @@
-@import url("/home/samuel/.cache/wal/colors-waybar.css");
-
 * {
   font-size: 16px;
 }
@@ -15,7 +13,7 @@ window {
   margin: 10px 10px 4px 10px;
   border: none;
   font-weight: 700;
-  background-color: @background;
+  background-color: --wofi-color0;
   outline: none;
   border-radius: 12px;
 }
@@ -23,12 +21,12 @@ window {
 #input:focus {
   border: none;
   margin-bottom: 4px;
-  box-shadow: inset 0 0 0 2px @color13;
+  box-shadow: inset 0 0 0 2px --wofi-color13;
 }
 
 #outer-box {
-  background-color: @background;
-  border: 2px solid @color13;
+  background-color: --wofi-color0;
+  border: 2px solid --wofi-color13;
   border-radius: 10px;
   padding: 6px;
   margin: 0;
@@ -68,14 +66,14 @@ window {
   margin: 2px 4px;
   padding: 0.2em 0.5em;
   border-radius: 10px;
-  background-color: @color13;
-  color: @color0;
-  border-left: 2px solid @color11;
+  background-color: --wofi-color13;
+  color: --wofi-color0;
+  border-left: 2px solid --wofi-color11;
 }
 
 #text:selected {
   margin: 0;
   border: none;
   border-radius: 10px;
-  color: @color0;
+  color: --wofi-color0;
 }
